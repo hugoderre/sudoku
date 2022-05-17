@@ -1,5 +1,5 @@
-import Board from "./Sudoku/Board.js";
-import Actions from "./Sudoku/Actions.js";
+import Board from "./Components/Board.js";
+import Actions from "./Components/Actions.js";
 
 class Sudoku {
     constructor() {
