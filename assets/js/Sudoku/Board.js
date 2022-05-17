@@ -1,17 +1,11 @@
-class Sudoku {
+export default class Board {
     constructor() {
-        this.rootDOM = document.getElementById( 'root' )
-        this.map = {}
         this.userEditableCell = null
-        this.init()
     }
 
-    init() {
-        this.createMap()
-        document.addEventListener( 'keydown', this.handleCellUserInput.bind( this ) )
-    }
-
-    createMap() {
+    getBoard() {
+        const container = document.createElement( 'div' )
+        container.id = 'map'
         for ( let groupIndex = 1; groupIndex <= 9; groupIndex++ ) {
             let groupElement = document.createElement( 'div' )
             groupElement.dataset.group = groupIndex
@@ -23,8 +17,12 @@ class Sudoku {
                 cellElement.addEventListener( 'click', this.cellEditableListener.bind( this ) )
                 groupElement.append( cellElement )
             }
-            this.rootDOM.append( groupElement )
+            container.append( groupElement )
         }
+
+        document.addEventListener( 'keydown', this.handleCellUserInput.bind( this ) )
+
+        return container;
     }
 
     cellEditableListener( e ) {
@@ -47,7 +45,7 @@ class Sudoku {
             return
         }
 
-        if ( isNaN( e.key ) ) {
+        if ( isNaN( e.key ) || e.key === '0' ) {
             return
         }
 
@@ -55,7 +53,4 @@ class Sudoku {
         cellValueElement.innerText = e.key
         this.userEditableCell.innerHTML = cellValueElement.outerHTML
     }
-
 }
-
-new Sudoku()

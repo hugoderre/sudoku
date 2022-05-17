@@ -1,11 +1,11 @@
-#root {
+#map {
   display: flex;
   flex-wrap: wrap;
   width: 488px;
   margin: auto;
   gap: 4px;
 }
-#root .group {
+#map .group {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
@@ -13,7 +13,7 @@
   width: 158px;
   height: 158px;
 }
-#root .group .cell {
+#map .group .cell {
   width: 50px;
   height: 50px;
   border: 1px solid black;
@@ -21,10 +21,10 @@
   justify-content: center;
   align-items: center;
 }
-#root .group .cell span {
+#map .group .cell span {
   font-size: 32px;
 }
-#root .group .cell.editable {
+#map .group .cell.editable {
   background-color: darksalmon;
 }
 
