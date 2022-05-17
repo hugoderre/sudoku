@@ -28,14 +28,32 @@ class Sudoku {
     }
 
     cellEditableListener( e ) {
-        this.userEditableCell = e.target;
+        if( !this.userEditableCell || this.userEditableCell != e.target ) {
+            this.disableUserEditableCell()
+            this.userEditableCell = e.target
+        }
         this.userEditableCell.classList.toggle( 'editable' )
+    }
+
+    disableUserEditableCell() {
+        if( this.userEditableCell instanceof HTMLElement  ) {
+            this.userEditableCell.classList.toggle( 'editable' )
+        }
+        this.userEditableCell = null
     }
 
     handleCellUserInput( e ) {
         if ( ! ( this.userEditableCell instanceof HTMLElement ) ) {
             return
         }
+
+        if ( isNaN( e.key ) ) {
+            return
+        }
+
+        let cellValueElement = document.createElement( 'span' )
+        cellValueElement.innerText = e.key
+        this.userEditableCell.innerHTML = cellValueElement.outerHTML
     }
 
 }
