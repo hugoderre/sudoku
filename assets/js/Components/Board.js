@@ -4,8 +4,8 @@ export default class Board {
     }
 
     getBoard() {
-        const container = document.createElement( 'div' )
-        container.id = 'map'
+        const board = document.createElement( 'div' )
+        board.id = 'map'
         for ( let groupIndex = 1; groupIndex <= 9; groupIndex++ ) {
             let groupElement = document.createElement( 'div' )
             groupElement.dataset.group = groupIndex
@@ -17,12 +17,12 @@ export default class Board {
                 cellElement.addEventListener( 'click', this.cellEditableListener.bind( this ) )
                 groupElement.append( cellElement )
             }
-            container.append( groupElement )
+            board.append( groupElement )
         }
 
         document.addEventListener( 'keydown', this.handleCellUserInput.bind( this ) )
 
-        return container;
+        return board;
     }
 
     cellEditableListener( e ) {
