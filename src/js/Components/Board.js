@@ -26,18 +26,11 @@ export default class Board {
     }
 
     cellEditableListener( e ) {
-        if( !this.userEditableCell || this.userEditableCell != e.target ) {
-            this.disableUserEditableCell()
-            this.userEditableCell = e.target
+        if ( this.userEditableCell ) {
+            this.userEditableCell.classList.remove( 'editable' )
         }
-        this.userEditableCell.classList.toggle( 'editable' )
-    }
-
-    disableUserEditableCell() {
-        if( this.userEditableCell instanceof HTMLElement  ) {
-            this.userEditableCell.classList.toggle( 'editable' )
-        }
-        this.userEditableCell = null
+        this.userEditableCell = e.target
+        this.userEditableCell.classList.add( 'editable' )
     }
 
     handleCellUserInput( e ) {
