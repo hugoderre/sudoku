@@ -7,6 +7,7 @@ body {
 
 #root {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #D9AFD9;
@@ -19,7 +20,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     width: 488px;
-    margin: auto;
     gap: 4px;
     .group {
         display: flex;
@@ -42,5 +42,14 @@ body {
                 background-color: darksalmon;
             }
         }
+    }
+}
+
+#actions {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    .action {
+        
     }
 }
