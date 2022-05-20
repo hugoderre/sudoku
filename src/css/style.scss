@@ -25,21 +25,22 @@ body {
         display: flex;
         flex-wrap: wrap;
         gap: 1px;
-        border: 1px solid black;
+        border: 1px solid #020202;
         width: 158px;
         height:158px;
         .cell {
             width:50px;
             height:50px;
-            border: 1px solid black;
+            border: 1px solid #020202;
             display: flex;
             justify-content: center;
             align-items: center;
             span {
                 font-size: 32px;
+                pointer-events: none;
             }
             &.editable {
-                background-color: darksalmon;
+                background-color: #2e0fd72e;
             }
         }
     }
@@ -50,6 +51,16 @@ body {
     gap: 10px;
     padding: 15px;
     .action {
-        
+        border: 2px solid #020202;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: 700;
+        background-color: transparent;
+        // &:hover {
+        //     background-color: #020202;
+        //     color: white;
+        // }
     }
 }
