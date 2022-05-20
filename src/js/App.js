@@ -1,7 +1,7 @@
 import Board from "./Components/Board.js";
 import Actions from "./Components/Actions.js";
 
-class Sudoku {
+class App {
     constructor() {
         this.rootDOM = document.getElementById( 'root' )
         this.board = new Board()
@@ -14,4 +14,4 @@ class Sudoku {
     }
 }
 
-new Sudoku()
+new App()
