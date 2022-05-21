@@ -1,6 +1,7 @@
 export default class Board {
     constructor() {
         this.userEditableCell = null
+        this.cells = []
     }
 
     getBoard() {
@@ -8,14 +9,15 @@ export default class Board {
         board.id = 'map'
         for ( let groupIndex = 1; groupIndex <= 9; groupIndex++ ) {
             let groupElement = document.createElement( 'div' )
-            groupElement.dataset.group = groupIndex
+            groupElement.dataset.groupIndex = groupIndex
             groupElement.classList.add( 'group' )
             for ( let cellIndex = 1; cellIndex <= 9; cellIndex++ ) {
                 let cellElement = document.createElement( 'div' )
                 cellElement.classList.add( 'cell' )
-                cellElement.dataset.cell = cellIndex
+                cellElement.dataset.cellIndex = cellIndex
                 cellElement.addEventListener( 'click', this.cellEditableListener.bind( this ) )
                 groupElement.append( cellElement )
+                this.cells.push( cellElement )
             }
             board.append( groupElement )
         }
@@ -42,8 +44,16 @@ export default class Board {
             return
         }
 
-        let cellValueElement = document.createElement( 'span' )
-        cellValueElement.innerText = e.key
-        this.userEditableCell.innerHTML = cellValueElement.outerHTML
+        this.updateCellValue( this.userEditableCell, e.key )
+    }
+
+    updateCellValue( cell, value ) {
+        let valueElement = document.createElement( 'span' )
+        valueElement.innerText = value
+        cell.innerHTML = valueElement.outerHTML
+    }
+
+    getCellValue( cell ) {
+        return cell.innerText
     }
 }
