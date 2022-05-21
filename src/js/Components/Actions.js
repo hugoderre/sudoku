@@ -1,5 +1,10 @@
 export default class Actions {
-    static getActions() {
+
+    constructor( board ) {
+        this.board = board
+    }
+
+    getActions() {
         const actions = document.createElement( 'div' )
         actions.id = 'actions'
         actions.classList.add( 'actions' )
@@ -8,7 +13,7 @@ export default class Actions {
         return actions
     }
 
-    static getNewGameButton() {
+    getNewGameButton() {
         const newGameButton = document.createElement( 'button' )
         newGameButton.id = 'newGame'
         newGameButton.classList.add( 'action' )
@@ -17,11 +22,11 @@ export default class Actions {
         return newGameButton
     }
 
-    static newGameListener( e ) {
+    newGameListener( e ) {
         console.log( 'new game' )
     }
 
-    static getCheckButton() {
+    getCheckButton() {
         const checkButton = document.createElement( 'button' )
         checkButton.id = 'check'
         checkButton.classList.add( 'action' )
@@ -30,7 +35,7 @@ export default class Actions {
         return checkButton
     }
 
-    static checkListener( e ) {
+    checkListener( e ) {
         console.log( 'check' )
     }
 }

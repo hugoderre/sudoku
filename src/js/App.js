@@ -5,12 +5,13 @@ class App {
     constructor() {
         this.rootDOM = document.getElementById( 'root' )
         this.board = new Board()
+        this.actions = new Actions( this.board )
         this.init()
     }
 
     init() {
         this.rootDOM.append( this.board.getBoard() )
-        this.rootDOM.append( Actions.getActions() )
+        this.rootDOM.append( this.actions.getActions() )
     }
 }
 
