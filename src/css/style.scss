@@ -16,7 +16,7 @@ body {
     margin: 0;
 }
 
-#map {
+#board {
     display: flex;
     flex-wrap: wrap;
     width: 488px;
@@ -39,6 +39,12 @@ body {
                 font-size: 32px;
                 pointer-events: none;
             }
+            &.correct {
+                background-color: #00e74154;
+            }
+            &.incorrect {
+                background-color: #e7230054;
+            }
             &.editable {
                 background-color: #2e0fd72e;
             }
@@ -46,11 +52,11 @@ body {
     }
 }
 
-#actions {
+#game-buttons {
     display: flex;
     gap: 10px;
     padding: 15px;
-    .action {
+    button {
         border: 2px solid #020202;
         padding: 10px 20px;
         font-size: 16px;

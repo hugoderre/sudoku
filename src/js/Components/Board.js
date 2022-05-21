@@ -2,11 +2,12 @@ export default class Board {
     constructor() {
         this.userEditableCell = null
         this.cells = []
+        this.DOMContainer = this.initBoard()
     }
 
-    getBoard() {
+    initBoard() {
         const board = document.createElement( 'div' )
-        board.id = 'map'
+        board.id = 'board'
         for ( let groupIndex = 1; groupIndex <= 9; groupIndex++ ) {
             let groupElement = document.createElement( 'div' )
             groupElement.dataset.groupIndex = groupIndex
@@ -27,12 +28,23 @@ export default class Board {
         return board;
     }
 
+    getBoard() {
+        return this.DOMContainer
+    }
+
     cellEditableListener( e ) {
         if ( this.userEditableCell ) {
-            this.userEditableCell.classList.remove( 'editable' )
+            this.unsetEditableCell()
         }
         this.userEditableCell = e.target
         this.userEditableCell.classList.add( 'editable' )
+    }
+
+    unsetEditableCell() {
+        if ( this.userEditableCell ) {
+            this.userEditableCell.classList.remove( 'editable' )
+        }
+        this.userEditableCell = null
     }
 
     handleCellUserInput( e ) {
@@ -55,5 +67,26 @@ export default class Board {
 
     getCellValue( cell ) {
         return cell.innerText
+    }
+
+    setCellCheckState( cell, isCorrect ) {
+        cell.classList.add( 
+            isCorrect ? 'correct' : 'incorrect'
+        )
+    }
+
+    clearCheckModeCells() {
+        for ( let i = 0; i < this.cells.length; i++ ) {
+            this.cells[ i ].classList.remove( 'correct' )   
+            this.cells[ i ].classList.remove( 'incorrect' )   
+        }
+    }
+
+    clearBoard() {
+        for ( let i = 0; i < this.cells.length; i++ ) {
+            const cell = this.cells[ i ]
+            cell.innerHTML = ''
+            this.clearCheckModeCells()
+        }
     }
 }

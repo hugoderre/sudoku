@@ -1,41 +1,30 @@
 export default class Actions {
 
-    constructor( board ) {
-        this.board = board
+    constructor( game ) {
+        this.game = game
     }
 
-    getActions() {
-        const actions = document.createElement( 'div' )
-        actions.id = 'actions'
-        actions.classList.add( 'actions' )
-        actions.append( this.getNewGameButton() )
-        actions.append( this.getCheckButton() )
-        return actions
+    getGameButtons() {
+        const gameButtons = document.createElement( 'div' )
+        gameButtons.id = 'game-buttons'
+        gameButtons.append( this.getNewGameButton() )
+        gameButtons.append( this.getCheckButton() )
+        return gameButtons
     }
 
     getNewGameButton() {
         const newGameButton = document.createElement( 'button' )
         newGameButton.id = 'newGame'
-        newGameButton.classList.add( 'action' )
         newGameButton.innerText = 'New Game'
-        newGameButton.addEventListener( 'click', this.newGameListener.bind( this ) )
+        newGameButton.addEventListener( 'click', this.game.startGame.bind( this.game ) )
         return newGameButton
-    }
-
-    newGameListener( e ) {
-        console.log( 'new game' )
     }
 
     getCheckButton() {
         const checkButton = document.createElement( 'button' )
         checkButton.id = 'check'
-        checkButton.classList.add( 'action' )
         checkButton.innerText = 'Check'
-        checkButton.addEventListener( 'click', this.checkListener.bind( this ) )
+        checkButton.addEventListener( 'click', this.game.checkValues.bind( this.game ) )
         return checkButton
-    }
-
-    checkListener( e ) {
-        console.log( 'check' )
     }
 }
