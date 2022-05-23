@@ -65,8 +65,19 @@ export default class Board {
         cell.innerHTML = valueElement.outerHTML
     }
 
+    getGroupOfCells( groupIndex ) {
+        return this.cells.slice( groupIndex * 9, ( groupIndex + 1 ) * 9 )
+    }
+
     getCellValue( cell ) {
+        if ( ! cell ) {
+            return null
+        }
         return cell.innerText
+    }
+
+    getGroupIndex( cell ) {
+        return parseInt( cell.parentNode.dataset.groupIndex )
     }
 
     setCellCheckState( cell, isCorrect ) {

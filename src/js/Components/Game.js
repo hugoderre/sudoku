@@ -1,3 +1,5 @@
+import Generator from './Generator.js';
+
 export default class Game {
     constructor( board ) {
         this.board = board
@@ -6,15 +8,7 @@ export default class Game {
 
     startGame() {
         this.board.clearBoard()
-
-        for (let i = 0; i < 9; i++) {
-            for (let j = 0; j < 9; j++) {
-                const cell = this.board.cells[ i * 9 + j ]
-                this.board.updateCellValue( cell, 7 )
-                this.correctValues.push( 7 )
-            }
-        }
-        
+        this.correctValues = new Generator( this.board, 'easy' ).generateValues()
     }
 
     checkValues( e ) {
