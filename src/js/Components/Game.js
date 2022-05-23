@@ -14,16 +14,16 @@ export default class Game {
     checkValues( e ) {
         this.board.unsetEditableCell()
         this.board.clearCheckModeCells()
+        
         for ( let i = 0; i < this.board.cells.length; i++ ) {
             const cell = this.board.cells[ i ]
-            const value = this.board.getCellValue( cell )
+            const boardValue = this.board.getCellValue( cell )
             const correctValue = this.getCorrectValue( cell )
-            this.board.setCellCheckState( cell, value == correctValue )
+            this.board.setCellCheckState( cell, boardValue == correctValue )
         }
     }
 
     getCorrectValue( cell ) {
-        const cellIndex = this.board.cells.indexOf( cell )
-        return this.correctValues[ cellIndex - 1 ]
+        return this.correctValues[ this.board.cells.indexOf( cell )  ]
     }
 }
