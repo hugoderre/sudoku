@@ -7,21 +7,24 @@ export default class Generator {
 
     generateValues() {
 
-        
-        this.shuffleRows()
-        this.shuffleColumns()
-        while ( this.gridHasDuplicateNumberInGroups() ) {
-            // console.log('reshuffling')
-            for (let i = 0; i < 200; i++) {
-                this.shuffleRows()
-                this.shuffleColumns()
-            }
+        for (let i = 0; i < 500; i++) {
+            this.shuffleDigits()
         }
 
-        const groups = this.getGroupsOfGrid()
+        for (let i = 0; i < 5; i++) {
+            this.shuffleRows([0, 2])
+            this.shuffleRows([3, 5])
+            this.shuffleRows([6, 8])
+        }
+
+        for (let i = 0; i < 5; i++) {
+            this.shuffleColumns([0, 2])
+            this.shuffleColumns([3, 5])
+            this.shuffleColumns([6, 8])
+        }
 
         let flatGroups = []
-        for (let group of groups) {
+        for (let group of this.getGroupsOfGrid()) {
             flatGroups = flatGroups.concat(group)
         }
 
@@ -51,33 +54,48 @@ export default class Generator {
         ] )
     }
 
-    shuffleRows() {
-        let j = Math.floor(Math.random() * 3)
-        let k = Math.floor(Math.random() * 2) ? 3 : 6
-        let row = this.grid[j]
-        this.grid[j] = this.grid[j + k]
-        this.grid[j + k] = row
-    }
-
-    shuffleColumns() {
-        let j = Math.floor(Math.random() * 3)
-        let k = Math.floor(Math.random() * 2) ? 3 : 6
-        let column = this.grid.map(row => row[j])
-        this.grid.map((row, i) => {
-            row[j] = row[j + k]
-            row[j + k] = column[i]
-        })   
-    }
-
-    gridHasDuplicateNumberInGroups() {
+    shuffleDigits() {
         const groups = this.getGroupsOfGrid()
-        console.log(groups)
-        for (let group of groups) {
-            if ((new Set(group)).size !== group.length) {
-                return true
-            }
+        const randomDigit1 = Math.ceil(Math.random() * 9);
+        let randomDigit2 = Math.ceil(Math.random() * 9);
+        while(randomDigit1 === randomDigit2) {
+            randomDigit2 = Math.ceil(Math.random() * 9);
+        } 
+
+        for (let i = 0; i < groups.length; i++) {
+            let randomIndex1 = groups[i].indexOf(randomDigit1)
+            let randomIndex2 = groups[i].indexOf(randomDigit2)
+            this.grid[i][randomIndex1] = randomDigit2
+            this.grid[i][randomIndex2] = randomDigit1
         }
-        return false
+    } 
+
+    shuffleRows(range) {
+        const min = range[0]
+        const max = range[1]
+        const randomRow = Math.floor(Math.random() * (max - min + 1) + min);
+        const randomRow2 = Math.floor(Math.random() * (max - min + 1) + min);
+        const row = this.grid[randomRow]
+        this.grid[randomRow] = this.grid[randomRow2]
+        this.grid[randomRow2] = row
+    }
+
+    shuffleColumns(range) {
+        const min = range[0]
+        const max = range[1]
+        const randomColumn = Math.floor(Math.random() * (max - min + 1) + min);
+        const randomColumn2 = Math.floor(Math.random() * (max - min + 1) + min);
+        const column = this.grid.map(row => row[randomColumn])
+        this.grid.map((row, i) => row[randomColumn] = this.grid[i][randomColumn2])
+        this.grid.map((row, i) => row[randomColumn2] = column[i])
+    }
+
+    shuffleGroupRows() {
+        
+    }
+
+    shuffleGroupColumns() {
+        
     }
 
     getGroupsOfGrid() {
@@ -107,6 +125,17 @@ export default class Generator {
         }
         groups.push(group)
         return groups
+    }
+
+    gridHasDuplicateNumberInGroups() {
+        const groups = this.getGroupsOfGrid()
+        console.log(groups)
+        for (let group of groups) {
+            if ((new Set(group)).size !== group.length) {
+                return true
+            }
+        }
+        return false
     }
 
     getRowsValuesDupplicateCount() {
