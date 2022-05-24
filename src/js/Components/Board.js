@@ -81,7 +81,6 @@ export default class Board {
     }
 
     setCellCheckState( cell, isCorrect ) {
-        console.log(cell)
         cell.classList.add( 
             isCorrect ? 'correct' : 'incorrect'
         )

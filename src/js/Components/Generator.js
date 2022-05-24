@@ -7,7 +7,7 @@ export default class Generator {
 
     generateValues() {
 
-        for (let i = 0; i < 500; i++) {
+        for (let i = 0; i < 200; i++) {
             this.shuffleDigits()
         }
 
@@ -31,11 +31,14 @@ export default class Generator {
         for(let i = 0; i < flatGroups.length; i++) {
             this.board.updateCellValue(this.board.cells[i], flatGroups[i])
         }
-        
-        // Debug
-        this.getRowsValuesDupplicateCount()
-        this.getColumnsValuesDupplicateCount()
 
+        this.hideSomeCellsInGroups()
+
+        // Debug
+        // this.getRowsValuesDupplicateCount()
+        // this.getColumnsValuesDupplicateCount()
+        
+        return this.grid
     }
 
     getBaseGrid() {
@@ -55,12 +58,12 @@ export default class Generator {
     }
 
     shuffleDigits() {
+        const possibleDigits = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        const randomDigit1 = Math.ceil(Math.random() * possibleDigits.length);
+        possibleDigits.splice(possibleDigits.indexOf(randomDigit1), 1)
+        const randomDigit2 = Math.ceil(Math.random() * possibleDigits.length);
+
         const groups = this.getGroupsOfGrid()
-        const randomDigit1 = Math.ceil(Math.random() * 9);
-        let randomDigit2 = Math.ceil(Math.random() * 9);
-        while(randomDigit1 === randomDigit2) {
-            randomDigit2 = Math.ceil(Math.random() * 9);
-        } 
 
         for (let i = 0; i < groups.length; i++) {
             let randomIndex1 = groups[i].indexOf(randomDigit1)
@@ -88,14 +91,6 @@ export default class Generator {
         const column = this.grid.map(row => row[randomColumn])
         this.grid.map((row, i) => row[randomColumn] = this.grid[i][randomColumn2])
         this.grid.map((row, i) => row[randomColumn2] = column[i])
-    }
-
-    shuffleGroupRows() {
-        
-    }
-
-    shuffleGroupColumns() {
-        
     }
 
     getGroupsOfGrid() {
@@ -127,9 +122,43 @@ export default class Generator {
         return groups
     }
 
+    hideSomeCellsInGroups() {
+        let numbersPerGroupToHide;
+        switch (this.difficulty) {
+            case 'easy':
+                numbersPerGroupToHide = 3
+                break;
+            case 'medium':
+                numbersPerGroupToHide = 4
+                break;
+            case 'hard':
+                numbersPerGroupToHide = 5
+                break;
+            default:
+                break;
+        }
+
+        let possibleIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        let indexesToHide;
+        for (let i = 0; i < this.board.cells.length; i++) {
+            if(i % 9 === 0) {
+                indexesToHide = []
+                for (let j = 0; j < numbersPerGroupToHide; j++) {
+                    let randomIndex = Math.floor(Math.random() * possibleIndex.length)
+                    indexesToHide.push(possibleIndex[randomIndex]);
+                    possibleIndex.splice(possibleIndex.indexOf(randomIndex), 1)
+                }
+                possibleIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+            }
+            if(indexesToHide.includes(i % 9)) {
+                this.board.updateCellValue(this.board.cells[i], null)
+            }
+        }
+    }
+
     gridHasDuplicateNumberInGroups() {
         const groups = this.getGroupsOfGrid()
-        console.log(groups)
+
         for (let group of groups) {
             if ((new Set(group)).size !== group.length) {
                 return true
