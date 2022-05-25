@@ -1,3 +1,5 @@
+import Helpers from './Helpers.js';
+
 export default class Generator {
     constructor( board, difficulty ) {
         this.board = board
@@ -23,20 +25,18 @@ export default class Generator {
             this.shuffleColumns([6, 8])
         }
 
-        let flatGroups = []
-        for (let group of this.getGroupsOfGrid()) {
-            flatGroups = flatGroups.concat(group)
-        }
+        const groups = Helpers.convertRowValuesToGroupedValues( this.grid );
+        const groupsFlat = Helpers.concatArraysInArray( groups );
 
-        for(let i = 0; i < flatGroups.length; i++) {
-            this.board.updateCellValue(this.board.cells[i], flatGroups[i])
+        for(let i = 0; i < groupsFlat.length; i++) {
+            this.board.updateCellValue(this.board.cells[i], groupsFlat[i])
         }
 
         this.hideSomeCellsInGroups()
 
         // Debug
-        // this.getRowsValuesDupplicateCount()
-        // this.getColumnsValuesDupplicateCount()
+        // this.getRowsValuesDuplicateCount()
+        // this.getColumnsValuesDuplicateCount()
         
         return this.grid
     }
@@ -63,7 +63,7 @@ export default class Generator {
         possibleDigits.splice(possibleDigits.indexOf(randomDigit1), 1)
         const randomDigit2 = Math.ceil(Math.random() * possibleDigits.length);
 
-        const groups = this.getGroupsOfGrid()
+        const groups = Helpers.convertRowValuesToGroupedValues( this.grid );
 
         for (let i = 0; i < groups.length; i++) {
             let randomIndex1 = groups[i].indexOf(randomDigit1)
@@ -93,38 +93,12 @@ export default class Generator {
         this.grid.map((row, i) => row[randomColumn2] = column[i])
     }
 
-    getGroupsOfGrid() {
-        const groups = []
-        let group = []
-        let a = 0
-        let b = 0
-        for (let i = 0; i < 81; i++) {
-            if(i != 0) {
-                if(i % 27 === 0) {
-                    a += 3
-                    b = 0
-                }
-                if(i % 9 === 0) {
-                    groups.push(group)
-                    group = []
-                    a -= 3
-                    b += 3
-                }
-                if(i % 3 === 0) {
-                    a++
-                    b -= 3
-                }
-            }
-            group.push(this.grid[a][b])
-            b++
-        }
-        groups.push(group)
-        return groups
-    }
-
     hideSomeCellsInGroups() {
         let numbersPerGroupToHide;
         switch (this.difficulty) {
+            case 'no-hide':
+                numbersPerGroupToHide = 0;
+                break;
             case 'easy':
                 numbersPerGroupToHide = 3
                 break;
@@ -157,8 +131,7 @@ export default class Generator {
     }
 
     gridHasDuplicateNumberInGroups() {
-        const groups = this.getGroupsOfGrid()
-
+        const groups = Helpers.convertRowValuesToGroupedValues( this.grid );
         for (let group of groups) {
             if ((new Set(group)).size !== group.length) {
                 return true
@@ -167,7 +140,7 @@ export default class Generator {
         return false
     }
 
-    getRowsValuesDupplicateCount() {
+    getRowsValuesDuplicateCount() {
         const rows = []
         rows[0] = this.getMaxDupplicateValues(this.board.getCellValue( this.board.cells[0]) + this.board.getCellValue( this.board.cells[1]) + this.board.getCellValue( this.board.cells[2]) + this.board.getCellValue( this.board.cells[9]) + this.board.getCellValue( this.board.cells[10]) + this.board.getCellValue( this.board.cells[11]) + this.board.getCellValue( this.board.cells[18]) + this.board.getCellValue( this.board.cells[19]) + this.board.getCellValue( this.board.cells[20]) )
         rows[1] = this.getMaxDupplicateValues(this.board.getCellValue( this.board.cells[3]) + this.board.getCellValue( this.board.cells[4]) + this.board.getCellValue( this.board.cells[5]) + this.board.getCellValue( this.board.cells[12]) + this.board.getCellValue( this.board.cells[13]) + this.board.getCellValue( this.board.cells[14]) + this.board.getCellValue( this.board.cells[21]) + this.board.getCellValue( this.board.cells[22]) + this.board.getCellValue( this.board.cells[23]))
@@ -189,7 +162,7 @@ export default class Generator {
 
     
 
-    getColumnsValuesDupplicateCount() {
+    getColumnsValuesDuplicateCount() {
         const cols = []
         cols[0] = this.getMaxDupplicateValues(this.board.getCellValue( this.board.cells[0]) + this.board.getCellValue( this.board.cells[3]) + this.board.getCellValue( this.board.cells[6]) + this.board.getCellValue( this.board.cells[27]) + this.board.getCellValue( this.board.cells[30]) + this.board.getCellValue( this.board.cells[33]) + this.board.getCellValue( this.board.cells[54]) + this.board.getCellValue( this.board.cells[57]) + this.board.getCellValue( this.board.cells[60]))
         cols[1] = this.getMaxDupplicateValues(this.board.getCellValue( this.board.cells[1]) + this.board.getCellValue( this.board.cells[4]) + this.board.getCellValue( this.board.cells[7]) + this.board.getCellValue( this.board.cells[28]) + this.board.getCellValue( this.board.cells[31]) + this.board.getCellValue( this.board.cells[34]) + this.board.getCellValue( this.board.cells[55]) + this.board.getCellValue( this.board.cells[58]) + this.board.getCellValue( this.board.cells[61]))
