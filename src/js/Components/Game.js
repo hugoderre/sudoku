@@ -16,8 +16,8 @@ export default class Game {
         this.board.unsetEditableCell()
         this.board.clearCheckModeCells()
 
-        const correctGroups = Helpers.convertRowValuesToGroupedValues( this.correctValues );
-        const correctGroupsFlat = Helpers.concatArraysInArray( correctGroups );
+        const correctGroups = Helpers.convertRowValuesToGroupedValues( this.correctValues )
+        const correctGroupsFlat = Helpers.concatArraysInArray( correctGroups )
 
         for (let i = 0; i < correctGroupsFlat.length; i++) {
             const cell = this.board.cells[i]
