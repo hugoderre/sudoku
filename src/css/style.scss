@@ -45,8 +45,11 @@ body {
             &.incorrect {
                 background-color: #e7230054;
             }
+            &.attached-to-editable {
+                background-color: #6e5dd12e;
+            }
             &.editable {
-                background-color: #2e0fd72e;
+                background-color: #2609cd4e;
             }
         }
     }

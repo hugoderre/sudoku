@@ -42,13 +42,16 @@ body {
   pointer-events: none;
 }
 #board .group .cell.correct {
-  background-color: rgba(0, 231, 65, 0.3294117647);
+  background-color: #00e74154;
 }
 #board .group .cell.incorrect {
-  background-color: rgba(231, 35, 0, 0.3294117647);
+  background-color: #e7230054;
+}
+#board .group .cell.attached-to-editable {
+  background-color: #6e5dd12e;
 }
 #board .group .cell.editable {
-  background-color: rgba(46, 15, 215, 0.1803921569);
+  background-color: #2609cd4e;
 }
 
 #game-buttons {

@@ -9,7 +9,7 @@ export default class Game {
 
     startGame() {
         this.board.clearBoard()
-        this.correctValues = new Generator( this.board, 'no-hide' ).generateValues()
+        this.correctValues = new Generator( this.board, 'hard' ).generateValues()
     }
 
     checkValues( e ) {

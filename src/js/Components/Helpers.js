@@ -28,11 +28,29 @@ export default class Helpers {
         return groupedValues
     }
 
+    static convertGroupedValuesToRowValues(groupedValues) {
+        return Helpers.convertRowValuesToGroupedValues(groupedValues)
+    }
+
     static concatArraysInArray(array) {
         let result = []
         for (let i = 0; i < array.length; i++) {
             result = result.concat(array[i])
         }
+        return result
+    }
+
+    static arraysInArray(array, itemByArray = 9) {
+        let result = []
+        let subArray = []
+        for (let i = 0; i < array.length; i++) {
+            if(i && i % itemByArray === 0) {
+                result.push(subArray)
+                subArray = []
+            }
+            subArray.push(array[i])
+        }
+        result.push(subArray)
         return result
     }
 }

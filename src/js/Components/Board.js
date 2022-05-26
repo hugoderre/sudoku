@@ -1,3 +1,5 @@
+import Helpers from "./Helpers.js"
+
 export default class Board {
     constructor() {
         this.userEditableCell = null
@@ -38,6 +40,11 @@ export default class Board {
         }
         this.userEditableCell = e.target
         this.userEditableCell.classList.add( 'editable' )
+
+        const attachedCells = this.getCellsAttachedToEditableCell( this.userEditableCell )
+        for ( let i = 0; i < attachedCells.length; i++ ) {
+            attachedCells[i].classList.add( 'attached-to-editable' )
+        }
     }
 
     unsetEditableCell() {
@@ -45,6 +52,10 @@ export default class Board {
             this.userEditableCell.classList.remove( 'editable' )
         }
         this.userEditableCell = null
+
+        for ( let i = 0; i < this.cells.length; i++ ) {
+            this.cells[i].classList.remove( 'attached-to-editable' )
+        }
     }
 
     handleCellUserInput( e ) {
@@ -65,8 +76,46 @@ export default class Board {
         cell.innerHTML = valueElement.outerHTML
     }
 
+    getRowedCellsDataFormat() {
+        return Helpers.concatArraysInArray( Helpers.convertGroupedValuesToRowValues( Helpers.arraysInArray( this.cells ) ) )
+    }
+
+    getCellsAttachedToEditableCell( cell ) {
+        const attachedCells = [
+            ...this.getGroupOfCells( this.getGroupIndex( cell ) ),
+            ...this.getRowOfCells( cell ),
+            ...this.getColumnOfCells( cell )
+        ]
+        // Get unique values
+        return [...new Set(attachedCells)]
+    }
+
     getGroupOfCells( groupIndex ) {
-        return this.cells.slice( groupIndex * 9, ( groupIndex + 1 ) * 9 )
+        return this.cells.slice( ( groupIndex - 1 ) * 9, groupIndex * 9 )
+    }
+
+    getRowOfCells( cell ) {
+        const rowIndex = this.getRowIndex( cell )
+        
+        return this.cells.filter( ( cell ) => {
+            return this.getRowIndex( cell ) == rowIndex
+        } )
+    }
+
+    getColumnOfCells( cell ) {
+        const columnIndex = this.getColumnIndex( cell )
+        
+        return this.cells.filter( ( cell ) => {
+            return this.getColumnIndex( cell ) == columnIndex
+        } )
+    }
+
+    getRowIndex( cell ) {
+        return Math.floor( this.getRowedCellsDataFormat().indexOf( cell ) / 9 )
+    }
+
+    getColumnIndex( cell ) {
+        return this.getRowedCellsDataFormat().indexOf( cell ) % 9
     }
 
     getCellValue( cell ) {
