@@ -125,7 +125,9 @@ export default class Generator {
                 possibleIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8]
             }
             if(indexesToHide.includes(i % 9)) {
-                this.board.updateCellValue(this.board.cells[i], null)
+                this.board.updateCellValue(this.board.cells[i], null) // Values to find
+            } else {
+                this.board.cells[i].classList.add('static') // Base values
             }
         }
     }

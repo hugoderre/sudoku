@@ -35,8 +35,13 @@ export default class Board {
     }
 
     cellEditableListener( e ) {
+        // Return if player click on a static cell
+        if ( e.target.classList.contains('static') ) {
+            return
+        }
+
         this.clearCheckModeCells()
-        
+
         if ( this.userEditableCell ) {
             this.unsetEditableCell()
         }
