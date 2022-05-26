@@ -35,6 +35,8 @@ export default class Board {
     }
 
     cellEditableListener( e ) {
+        this.clearCheckModeCells()
+        
         if ( this.userEditableCell ) {
             this.unsetEditableCell()
         }
