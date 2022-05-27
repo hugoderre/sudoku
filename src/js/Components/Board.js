@@ -45,13 +45,14 @@ export default class Board {
         if ( this.userEditableCell ) {
             this.unsetEditableCell()
         }
-        this.userEditableCell = e.target
-        this.userEditableCell.classList.add( 'editable' )
+        
+        this.setEditableCell( e.target )
+    }
 
-        const attachedCells = this.getCellsAttachedToEditableCell( this.userEditableCell )
-        for ( let i = 0; i < attachedCells.length; i++ ) {
-            attachedCells[i].classList.add( 'attached-to-editable' )
-        }
+    setEditableCell( cell ) {
+        this.userEditableCell = cell
+        this.userEditableCell.classList.add( 'editable' )
+        this.setHighlightAttachedCells( this.userEditableCell )
     }
 
     unsetEditableCell() {
@@ -60,8 +61,21 @@ export default class Board {
         }
         this.userEditableCell = null
 
+        this.unsetHighlightAttachedCells()
+    }
+
+    setHighlightAttachedCells( cell ) {
+        this.unsetHighlightAttachedCells()
+
+        const attachedCells = this.getCellsAttachedToEditableCell( cell )
+        for ( let i = 0; i < attachedCells.length; i++ ) {
+            attachedCells[i].classList.add( 'attached-to-editable' )
+        }
+    }
+
+    unsetHighlightAttachedCells() {
         for ( let i = 0; i < this.cells.length; i++ ) {
-            this.cells[i].classList.remove( 'attached-to-editable' )
+            this.cells[ i ].classList.remove( 'attached-to-editable' )
         }
     }
 
@@ -75,6 +89,7 @@ export default class Board {
         }
 
         this.updateCellValue( this.userEditableCell, e.key )
+        this.setHighlightAttachedCells( this.userEditableCell )
     }
 
     updateCellValue( cell, value ) {
@@ -91,10 +106,11 @@ export default class Board {
         const attachedCells = [
             ...this.getGroupOfCells( this.getGroupIndex( cell ) ),
             ...this.getRowOfCells( cell ),
-            ...this.getColumnOfCells( cell )
+            ...this.getColumnOfCells( cell ),
+            ...this.getCellsWithSameValue( cell )
         ]
         // Get unique values
-        return [...new Set(attachedCells)]
+        return [ ...new Set( attachedCells ) ]
     }
 
     getGroupOfCells( groupIndex ) {
@@ -114,6 +130,16 @@ export default class Board {
         
         return this.cells.filter( ( cell ) => {
             return this.getColumnIndex( cell ) == columnIndex
+        } )
+    }
+
+    getCellsWithSameValue( cell ) {
+        const value = this.getCellValue( cell )
+        if ( ! value ) {
+            return []
+        }
+        return this.cells.filter( ( cell ) => {
+            return this.getCellValue( cell ) == value
         } )
     }
 
