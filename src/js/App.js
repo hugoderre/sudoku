@@ -1,5 +1,4 @@
 import Board from "./Components/Board.js";
-import Game from "./Components/Game.js";
 import Actions from "./Components/Actions.js";
 
 class App {
@@ -12,9 +11,7 @@ class App {
         this.board = new Board()
         this.rootDOM.append( this.board.getBoard() )
 
-        this.game = new Game( this.board )
-        
-        this.actions = new Actions( this.game )
+        this.actions = new Actions( this.board )
         this.rootDOM.append( this.actions.getGameButtons() )
     }
 }

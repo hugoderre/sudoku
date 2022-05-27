@@ -1,9 +1,12 @@
+import Generator from "./Generator.js"
 import Helpers from "./Helpers.js"
 
 export default class Board {
     constructor() {
         this.userEditableCell = null
         this.cells = []
+        this.correctValues = []
+        this.checkMode = true
         this.DOMContainer = this.initBoard()
     }
 
@@ -34,13 +37,28 @@ export default class Board {
         return this.DOMContainer
     }
 
+    startGame() {
+        this.clearBoard()
+        this.correctValues = new Generator( this, 'hard' ).generateValues()
+    }
+
+    verifyValues() {
+        this.unsetEditableCell()
+        this.clearVerifyMode()
+
+        const correctGroups = Helpers.convertRowValuesToGroupedValues( this.correctValues )
+        const correctGroupsFlat = Helpers.concatArraysInArray( correctGroups )
+
+        this.setVerifyMode( correctGroupsFlat )
+    }
+
     cellEditableListener( e ) {
         // Return if player click on a static cell
         if ( e.target.classList.contains('static') ) {
             return
         }
 
-        this.clearCheckModeCells()
+        this.clearVerifyMode()
 
         if ( this.userEditableCell ) {
             this.unsetEditableCell()
@@ -52,7 +70,7 @@ export default class Board {
     setEditableCell( cell ) {
         this.userEditableCell = cell
         this.userEditableCell.classList.add( 'editable' )
-        this.setHighlightAttachedCells( this.userEditableCell )
+        this.highlightCells( this.userEditableCell )
     }
 
     unsetEditableCell() {
@@ -61,21 +79,31 @@ export default class Board {
         }
         this.userEditableCell = null
 
-        this.unsetHighlightAttachedCells()
+        this.unsetHighlightCells()
     }
 
-    setHighlightAttachedCells( cell ) {
-        this.unsetHighlightAttachedCells()
+    highlightCells( cell ) {
+        this.unsetHighlightCells()
 
         const attachedCells = this.getCellsAttachedToEditableCell( cell )
         for ( let i = 0; i < attachedCells.length; i++ ) {
             attachedCells[i].classList.add( 'attached-to-editable' )
         }
+
+        if( this.checkMode ) {
+            this.highlightConflictCells()
+        }
     }
 
-    unsetHighlightAttachedCells() {
+    highlightConflictCells() {
+        console.log( 'highlightConflictCells' )
+        console.log(this.correctValues)
+    }
+
+    unsetHighlightCells() {
         for ( let i = 0; i < this.cells.length; i++ ) {
             this.cells[ i ].classList.remove( 'attached-to-editable' )
+            this.cells[ i ].classList.remove( 'incorrect' )
         }
     }
 
@@ -89,7 +117,7 @@ export default class Board {
         }
 
         this.updateCellValue( this.userEditableCell, e.key )
-        this.setHighlightAttachedCells( this.userEditableCell )
+        this.highlightCells( this.userEditableCell )
     }
 
     updateCellValue( cell, value ) {
@@ -162,13 +190,17 @@ export default class Board {
         return parseInt( cell.parentNode.dataset.groupIndex )
     }
 
-    setCellCheckState( cell, isCorrect ) {
-        cell.classList.add( 
-            isCorrect ? 'correct' : 'incorrect'
-        )
+    setVerifyMode( correctValues ) {
+        for (let i = 0; i < correctValues.length; i++) {
+            const cell = this.cells[i]
+            const cellValue = this.getCellValue( cell )
+            cell.classList.add( 
+                cellValue == correctValues[i] ? 'correct' : 'incorrect'
+            )
+        }
     }
 
-    clearCheckModeCells() {
+    clearVerifyMode() {
         for ( let i = 0; i < this.cells.length; i++ ) {
             this.cells[ i ].classList.remove( 'correct' )   
             this.cells[ i ].classList.remove( 'incorrect' )   
@@ -177,9 +209,9 @@ export default class Board {
 
     clearBoard() {
         for ( let i = 0; i < this.cells.length; i++ ) {
-            const cell = this.cells[ i ]
-            cell.innerHTML = ''
-            this.clearCheckModeCells()
+            this.cells[ i ].innerHTML = ''
+            this.cells[ i ].classList.remove( 'static' )  
+            this.clearVerifyMode()
         }
     }
 }
