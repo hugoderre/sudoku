@@ -5,7 +5,7 @@ export default class GameUI {
 
     getElements() {
         const gameButtons = document.createElement( 'div' )
-        gameButtons.id = 'game-buttons'
+        gameButtons.id = 'game-ui'
         gameButtons.append( this.getNewGameButton() )
         gameButtons.append( this.getDifficultySelector() )
         gameButtons.append( this.getVerifyButton() )

@@ -55,11 +55,11 @@ body {
     }
 }
 
-#game-buttons {
+#game-ui {
     display: flex;
     gap: 10px;
     padding: 15px;
-    button {
+    button, select {
         border: 2px solid #020202;
         padding: 10px 20px;
         font-size: 16px;
@@ -67,9 +67,5 @@ body {
         text-transform: uppercase;
         font-weight: 700;
         background-color: transparent;
-        // &:hover {
-        //     background-color: #020202;
-        //     color: white;
-        // }
     }
 }
