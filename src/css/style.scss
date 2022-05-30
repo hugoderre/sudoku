@@ -39,17 +39,17 @@ body {
                 font-size: 32px;
                 pointer-events: none;
             }
+            &.editable {
+                background-color: #2609cd4e;
+            }
+            &.attached-to-editable {
+                background-color: #6e5dd12e;
+            }
             &.correct {
                 background-color: #00e74154;
             }
             &.incorrect {
                 background-color: #e7230054;
-            }
-            &.attached-to-editable {
-                background-color: #6e5dd12e;
-            }
-            &.editable {
-                background-color: #2609cd4e;
             }
         }
     }

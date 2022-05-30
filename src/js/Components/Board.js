@@ -84,20 +84,33 @@ export default class Board {
 
     highlightCells( cell ) {
         this.unsetHighlightCells()
+        this.highlightAttachedCells( cell )
+        this.highlightAllConflictCells()
+    }
 
+    highlightAttachedCells( cell ) {
         const attachedCells = this.getCellsAttachedToEditableCell( cell )
         for ( let i = 0; i < attachedCells.length; i++ ) {
             attachedCells[i].classList.add( 'attached-to-editable' )
         }
-
-        if( this.checkMode ) {
-            this.highlightConflictCells()
-        }
     }
 
-    highlightConflictCells() {
-        console.log( 'highlightConflictCells' )
-        console.log(this.correctValues)
+    highlightAllConflictCells() {
+        for (const cell of this.cells) {
+            if ( ! this.getCellValue( cell ) ) {
+                continue
+            }
+            let siblingCells = [
+                ...this.getGroupOfCells( cell ),
+                ...this.getRowOfCells( cell ),
+                ...this.getColumnOfCells( cell )
+            ]
+            for ( const siblingCell of siblingCells ) {
+                if ( cell != siblingCell && this.getCellValue( cell ) == this.getCellValue( siblingCell ) ) {
+                    siblingCell.classList.add( 'incorrect' )
+                }
+            }
+        }
     }
 
     unsetHighlightCells() {
@@ -112,11 +125,14 @@ export default class Board {
             return
         }
 
-        if ( isNaN( e.key ) || e.key === '0' ) {
-            return
+        if ( e.key == 'Backspace' ) {
+            this.updateCellValue( this.userEditableCell, '' )
         }
 
-        this.updateCellValue( this.userEditableCell, e.key )
+        if ( ! isNaN( e.key ) && e.key != '0' ) {
+            this.updateCellValue( this.userEditableCell, e.key )
+        }
+        
         this.highlightCells( this.userEditableCell )
     }
 
@@ -132,7 +148,7 @@ export default class Board {
 
     getCellsAttachedToEditableCell( cell ) {
         const attachedCells = [
-            ...this.getGroupOfCells( this.getGroupIndex( cell ) ),
+            ...this.getGroupOfCells( cell ),
             ...this.getRowOfCells( cell ),
             ...this.getColumnOfCells( cell ),
             ...this.getCellsWithSameValue( cell )
@@ -141,7 +157,8 @@ export default class Board {
         return [ ...new Set( attachedCells ) ]
     }
 
-    getGroupOfCells( groupIndex ) {
+    getGroupOfCells( cell ) {
+        const groupIndex = this.getGroupIndex( cell )
         return this.cells.slice( ( groupIndex - 1 ) * 9, groupIndex * 9 )
     }
 

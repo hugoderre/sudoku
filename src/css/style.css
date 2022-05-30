@@ -41,17 +41,17 @@ body {
   font-size: 32px;
   pointer-events: none;
 }
+#board .group .cell.editable {
+  background-color: #2609cd4e;
+}
+#board .group .cell.attached-to-editable {
+  background-color: #6e5dd12e;
+}
 #board .group .cell.correct {
   background-color: #00e74154;
 }
 #board .group .cell.incorrect {
   background-color: #e7230054;
-}
-#board .group .cell.attached-to-editable {
-  background-color: #6e5dd12e;
-}
-#board .group .cell.editable {
-  background-color: #2609cd4e;
 }
 
 #game-buttons {
