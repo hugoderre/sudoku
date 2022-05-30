@@ -1,5 +1,6 @@
 import Generator from "./Generator.js"
 import Helpers from "./Helpers.js"
+import GameUI from "./GameUI.js"
 
 export default class Grid {
     constructor() {
@@ -39,7 +40,7 @@ export default class Grid {
 
     startGame() {
         this.clearBoard()
-        this.correctValues = new Generator( this, 'hard' ).generateValues()
+        this.correctValues = new Generator( this, GameUI.getUserDifficulty() ).generateValues()
     }
 
     verifyValues() {

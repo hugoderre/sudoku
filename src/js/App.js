@@ -1,5 +1,5 @@
 import Grid from "./Components/Grid.js";
-import Actions from "./Components/Actions.js";
+import GameUI from "./Components/GameUI.js";
 
 class App {
     constructor() {
@@ -11,8 +11,8 @@ class App {
         this.grid = new Grid()
         this.rootDOM.append( this.grid.getBoard() )
 
-        this.actions = new Actions( this.grid )
-        this.rootDOM.append( this.actions.getGameButtons() )
+        this.gameUI = new GameUI( this.grid )
+        this.rootDOM.append( this.gameUI.getElements() )
     }
 }
 
