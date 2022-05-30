@@ -4,7 +4,7 @@ export default class Generator {
     constructor( board, difficulty ) {
         this.board = board
         this.difficulty = difficulty
-        this.grid = this.getBaseGrid()
+        this.gridValues = this.getBaseGrid()
     }
 
     generateValues() {
@@ -25,7 +25,7 @@ export default class Generator {
             this.shuffleColumns([6, 8])
         }
 
-        const groups = Helpers.convertRowValuesToGroupedValues( this.grid )
+        const groups = Helpers.convertRowValuesToGroupedValues( this.gridValues )
         const groupsFlat = Helpers.concatArraysInArray( groups )
 
         for(let i = 0; i < groupsFlat.length; i++) {
@@ -38,7 +38,7 @@ export default class Generator {
         // Helpers.getRowsValuesDuplicateCount()
         // Helpers.getColumnsValuesDuplicateCount()
         
-        return this.grid
+        return this.gridValues
     }
 
     getBaseGrid() {
@@ -63,13 +63,13 @@ export default class Generator {
         possibleDigits.splice(possibleDigits.indexOf(randomDigit1), 1)
         const randomDigit2 = Math.ceil(Math.random() * possibleDigits.length)
 
-        const groups = Helpers.convertRowValuesToGroupedValues( this.grid )
+        const groups = Helpers.convertRowValuesToGroupedValues( this.gridValues )
 
         for (let i = 0; i < groups.length; i++) {
             let randomIndex1 = groups[i].indexOf(randomDigit1)
             let randomIndex2 = groups[i].indexOf(randomDigit2)
-            this.grid[i][randomIndex1] = randomDigit2
-            this.grid[i][randomIndex2] = randomDigit1
+            this.gridValues[i][randomIndex1] = randomDigit2
+            this.gridValues[i][randomIndex2] = randomDigit1
         }
     } 
 
@@ -78,9 +78,9 @@ export default class Generator {
         const max = range[1]
         const randomRow = Math.floor(Math.random() * (max - min + 1) + min)
         const randomRow2 = Math.floor(Math.random() * (max - min + 1) + min)
-        const row = this.grid[randomRow]
-        this.grid[randomRow] = this.grid[randomRow2]
-        this.grid[randomRow2] = row
+        const row = this.gridValues[randomRow]
+        this.gridValues[randomRow] = this.gridValues[randomRow2]
+        this.gridValues[randomRow2] = row
     }
 
     shuffleColumns(range) {
@@ -88,9 +88,9 @@ export default class Generator {
         const max = range[1]
         const randomColumn = Math.floor(Math.random() * (max - min + 1) + min)
         const randomColumn2 = Math.floor(Math.random() * (max - min + 1) + min)
-        const column = this.grid.map(row => row[randomColumn])
-        this.grid.map((row, i) => row[randomColumn] = this.grid[i][randomColumn2])
-        this.grid.map((row, i) => row[randomColumn2] = column[i])
+        const column = this.gridValues.map(row => row[randomColumn])
+        this.gridValues.map((row, i) => row[randomColumn] = this.gridValues[i][randomColumn2])
+        this.gridValues.map((row, i) => row[randomColumn2] = column[i])
     }
 
     hideSomeCellsInGroups() {
