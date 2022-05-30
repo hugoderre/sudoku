@@ -1,6 +1,6 @@
 export default class Actions {
-    constructor( board ) {
-        this.board = board
+    constructor( grid ) {
+        this.grid = grid
     }
 
     getGameButtons() {
@@ -15,7 +15,7 @@ export default class Actions {
         const newGameButton = document.createElement( 'button' )
         newGameButton.id = 'new-game'
         newGameButton.innerText = 'New Game'
-        newGameButton.addEventListener( 'click', this.board.startGame.bind( this.board ) )
+        newGameButton.addEventListener( 'click', this.grid.startGame.bind( this.grid ) )
         return newGameButton
     }
 
@@ -23,7 +23,7 @@ export default class Actions {
         const checkButton = document.createElement( 'button' )
         checkButton.id = 'verify'
         checkButton.innerText = 'Verify'
-        checkButton.addEventListener( 'click', this.board.verifyValues.bind( this.board ) )
+        checkButton.addEventListener( 'click', this.grid.verifyValues.bind( this.grid ) )
         return checkButton
     }
 }

@@ -15,13 +15,13 @@ body {
   margin: 0;
 }
 
-#board {
+#grid {
   display: flex;
   flex-wrap: wrap;
   width: 488px;
   gap: 4px;
 }
-#board .group {
+#grid .group {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
@@ -29,7 +29,7 @@ body {
   width: 158px;
   height: 158px;
 }
-#board .group .cell {
+#grid .group .cell {
   width: 50px;
   height: 50px;
   border: 1px solid #020202;
@@ -37,20 +37,20 @@ body {
   justify-content: center;
   align-items: center;
 }
-#board .group .cell span {
+#grid .group .cell span {
   font-size: 32px;
   pointer-events: none;
 }
-#board .group .cell.editable {
+#grid .group .cell.editable {
   background-color: #2609cd4e;
 }
-#board .group .cell.attached-to-editable {
+#grid .group .cell.attached-to-editable {
   background-color: #6e5dd12e;
 }
-#board .group .cell.correct {
+#grid .group .cell.correct {
   background-color: #00e74154;
 }
-#board .group .cell.incorrect {
+#grid .group .cell.incorrect {
   background-color: #e7230054;
 }
 

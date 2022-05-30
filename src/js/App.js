@@ -1,4 +1,4 @@
-import Board from "./Components/Board.js";
+import Grid from "./Components/Grid.js";
 import Actions from "./Components/Actions.js";
 
 class App {
@@ -8,10 +8,10 @@ class App {
     }
 
     init() {
-        this.board = new Board()
-        this.rootDOM.append( this.board.getBoard() )
+        this.grid = new Grid()
+        this.rootDOM.append( this.grid.getBoard() )
 
-        this.actions = new Actions( this.board )
+        this.actions = new Actions( this.grid )
         this.rootDOM.append( this.actions.getGameButtons() )
     }
 }

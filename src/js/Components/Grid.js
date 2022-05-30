@@ -1,7 +1,7 @@
 import Generator from "./Generator.js"
 import Helpers from "./Helpers.js"
 
-export default class Board {
+export default class Grid {
     constructor() {
         this.userEditableCell = null
         this.cells = []
@@ -11,8 +11,8 @@ export default class Board {
     }
 
     initBoard() {
-        const board = document.createElement( 'div' )
-        board.id = 'board'
+        const grid = document.createElement( 'div' )
+        grid.id = 'grid'
         for ( let groupIndex = 1; groupIndex <= 9; groupIndex++ ) {
             let groupElement = document.createElement( 'div' )
             groupElement.dataset.groupIndex = groupIndex
@@ -25,12 +25,12 @@ export default class Board {
                 groupElement.append( cellElement )
                 this.cells.push( cellElement )
             }
-            board.append( groupElement )
+            grid.append( groupElement )
         }
 
         document.addEventListener( 'keydown', this.handleCellUserInput.bind( this ) )
 
-        return board;
+        return grid;
     }
 
     getBoard() {

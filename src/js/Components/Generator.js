@@ -1,8 +1,8 @@
 import Helpers from './Helpers.js'
 
 export default class Generator {
-    constructor( board, difficulty ) {
-        this.board = board
+    constructor( grid, difficulty ) {
+        this.grid = grid
         this.difficulty = difficulty
         this.gridValues = this.getBaseGrid()
     }
@@ -29,7 +29,7 @@ export default class Generator {
         const groupsFlat = Helpers.concatArraysInArray( groups )
 
         for(let i = 0; i < groupsFlat.length; i++) {
-            this.board.updateCellValue(this.board.cells[i], groupsFlat[i])
+            this.grid.updateCellValue(this.grid.cells[i], groupsFlat[i])
         }
 
         this.hideSomeCellsInGroups()
@@ -114,7 +114,7 @@ export default class Generator {
 
         let possibleIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8]
         let indexesToHide
-        for (let i = 0; i < this.board.cells.length; i++) {
+        for (let i = 0; i < this.grid.cells.length; i++) {
             if(i % 9 === 0) {
                 indexesToHide = []
                 for (let j = 0; j < numbersPerGroupToHide; j++) {
@@ -125,9 +125,9 @@ export default class Generator {
                 possibleIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8]
             }
             if(indexesToHide.includes(i % 9)) {
-                this.board.updateCellValue(this.board.cells[i], null) // Values to find
+                this.grid.updateCellValue(this.grid.cells[i], null) // Values to find
             } else {
-                this.board.cells[i].classList.add('static') // Base values
+                this.grid.cells[i].classList.add('static') // Base values
             }
         }
     }
