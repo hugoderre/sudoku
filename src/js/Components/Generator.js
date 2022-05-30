@@ -33,10 +33,6 @@ export default class Generator {
         }
 
         this.hideSomeCellsInGroups()
-
-        // Debug
-        // Helpers.getRowsValuesDuplicateCount()
-        // Helpers.getColumnsValuesDuplicateCount()
         
         return this.gridValues
     }
