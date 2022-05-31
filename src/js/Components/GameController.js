@@ -16,6 +16,7 @@ export default class GameController {
     startGame() {
         this.grid.clearBoard()
         this.correctValues = new Generator( this.grid, this.gameUI.getUserDifficulty() ).generateValues()
+        this.gameUI.timer.start()
     }
 
     verifyValues() {

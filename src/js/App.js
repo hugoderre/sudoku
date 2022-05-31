@@ -9,14 +9,20 @@ class App {
     }
 
     init() {
+
+        this.container = document.createElement( 'div' )
+        this.container.classList.add('container')
+
         this.grid = new Grid()
-        this.rootDOM.append( this.grid.getBoard() )
+        this.container.append( this.grid.getBoard() )
 
         this.gameUI = new GameUI( this.grid )
-        this.rootDOM.prepend( this.gameUI.getTopElements() )
-        this.rootDOM.append( this.gameUI.getBottomElements() )
+        this.container.prepend( this.gameUI.getTopElements() )
+        this.container.append( this.gameUI.getBottomElements() )
 
         new GameController( this.grid, this.gameUI )
+
+        this.rootDOM.append( this.container )
     }
 }
 

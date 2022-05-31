@@ -8,7 +8,8 @@ export default class GameUI {
     getTopElements() {
         const elements = document.createElement( 'div' )
         elements.id = 'game-ui-top'
-        elements.append( new Timer().getTimer() )
+        this.timer = new Timer()
+        elements.append( this.timer.getTimer() )
         return elements
     }
 

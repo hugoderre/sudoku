@@ -1,4 +1,48 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap");
+.gg-timer,
+.gg-timer::before {
+  border: 2px solid;
+  width: 18px;
+  height: 18px;
+  border-radius: 40px;
+}
+
+.gg-timer {
+  background: linear-gradient(to left, currentColor 10px, transparent 0) no-repeat 6px -2px/2px 6px;
+  box-sizing: border-box;
+  transform: scale(var(--ggs, 1));
+  position: relative;
+  display: block;
+  border-top-color: transparent;
+}
+
+.gg-timer::after,
+.gg-timer::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.gg-timer::before {
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  right: -2px;
+  top: -2px;
+  transform: rotate(45deg);
+}
+
+.gg-timer::after {
+  width: 2px;
+  height: 6px;
+  background: currentColor;
+  transform: rotate(-50deg);
+  left: 4px;
+  bottom: 5px;
+  border-radius: 100px;
+}
+
 body {
   font-family: "Inter", sans-serif;
   margin: 0;
@@ -14,14 +58,13 @@ body {
   height: 100vh;
   margin: 0;
 }
-
-#grid {
+#root #grid {
   display: flex;
   flex-wrap: wrap;
   width: 488px;
   gap: 4px;
 }
-#grid .group {
+#root #grid .group {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
@@ -29,7 +72,7 @@ body {
   width: 158px;
   height: 158px;
 }
-#grid .group .cell {
+#root #grid .group .cell {
   width: 50px;
   height: 50px;
   border: 1px solid #020202;
@@ -37,44 +80,42 @@ body {
   justify-content: center;
   align-items: center;
 }
-#grid .group .cell span {
+#root #grid .group .cell span {
   font-size: 32px;
   pointer-events: none;
 }
-#grid .group .cell.attached-to-editable {
+#root #grid .group .cell.attached-to-editable {
   background-color: #6e5dd12e;
 }
-#grid .group .cell.editable {
+#root #grid .group .cell.editable {
   background-color: #2609cd4e;
 }
-#grid .group .cell.correct {
+#root #grid .group .cell.correct {
   background-color: #00e74154;
 }
-#grid .group .cell.incorrect {
+#root #grid .group .cell.incorrect {
   background-color: #e7230054;
 }
-
-#game-ui-top {
+#root #game-ui-top {
   display: flex;
+  justify-content: flex-end;
+}
+#root #game-ui-top #timer {
+  display: flex;
+  gap: 5px;
+  width: 80px;
+  padding-bottom: 5px;
+}
+#root #game-ui-top #timer span {
+  vertical-align: middle;
+}
+#root #game-ui-bottom {
+  display: flex;
+  justify-content: center;
   gap: 10px;
   padding: 15px;
 }
-#game-ui-top button, #game-ui-top select {
-  border: 2px solid #020202;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: 700;
-  background-color: transparent;
-}
-
-#game-ui-bottom {
-  display: flex;
-  gap: 10px;
-  padding: 15px;
-}
-#game-ui-bottom button, #game-ui-bottom select {
+#root #game-ui-bottom button, #root #game-ui-bottom select {
   border: 2px solid #020202;
   padding: 10px 20px;
   font-size: 16px;

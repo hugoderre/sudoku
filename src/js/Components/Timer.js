@@ -1,25 +1,43 @@
 export default class Timer {
+    constructor() {
+        this.time = 0
+    }
+
     getTimer() {
-        const timer = document.createElement( 'div' )
-        timer.id = 'timer'
-        timer.innerText = '00:00'
-        return timer
+        const timerContainer = document.createElement( 'div' )
+        timerContainer.id = 'timer'
+
+        this.timerSpan = document.createElement( 'span' )
+        this.timerSpan.innerText = '00:00'
+
+        const timerIcon = document.createElement( 'i' )
+        timerIcon.classList.add( 'gg-timer' )
+
+        timerContainer.append( timerIcon )
+        timerContainer.append( this.timerSpan )
+
+        return timerContainer
     }
 
-    startTimer() {
-        this.timer = setInterval( this.updateTimer.bind( this ), 1000 )
+    start() {
+        this.reset()
+        this.update() // Run directly once to update the timer
+        this.tick = setInterval( this.update.bind( this ), 1000 )
     }
 
-    updateTimer() {
-        const timer = document.getElementById( 'timer' )
-        const time = this.getTime()
-        timer.innerText = time
+    update() {
+        this.timerSpan.innerText = this.getTime()
+        this.time++
+    }
+
+    reset() {
+        this.time = 0
+        clearInterval( this.tick )
     }
 
     getTime() {
-        const time = new Date()
-        const minutes = time.getMinutes()
-        const seconds = time.getSeconds()
+        const minutes = Math.floor( this.time / 60 )
+        const seconds = this.time % 60 
         return `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`
     }
 }
