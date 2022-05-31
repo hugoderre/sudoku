@@ -1,6 +1,4 @@
-import Generator from "./Generator.js"
 import Helpers from "./Helpers.js"
-import GameUI from "./GameUI.js"
 
 export default class Grid {
     constructor() {
@@ -9,6 +7,11 @@ export default class Grid {
         this.correctValues = []
         this.checkMode = true
         this.DOMContainer = this.initBoard()
+        document.addEventListener( 'keydown', this.handleCellUserInput.bind( this ) )
+    }
+
+    getBoard() {
+        return this.DOMContainer
     }
 
     initBoard() {
@@ -29,28 +32,23 @@ export default class Grid {
             grid.append( groupElement )
         }
 
-        document.addEventListener( 'keydown', this.handleCellUserInput.bind( this ) )
-
         return grid;
     }
 
-    getBoard() {
-        return this.DOMContainer
-    }
+    handleCellUserInput( e ) {
+        if ( ! ( this.userEditableCell instanceof HTMLElement ) ) {
+            return
+        }
 
-    startGame() {
-        this.clearBoard()
-        this.correctValues = new Generator( this, GameUI.getUserDifficulty() ).generateValues()
-    }
+        if ( e.key == 'Backspace' ) {
+            this.updateCellValue( this.userEditableCell, '' )
+        }
 
-    verifyValues() {
-        this.unsetEditableCell()
-        this.clearVerifyMode()
-
-        const correctGroups = Helpers.convertRowValuesToGroupedValues( this.correctValues )
-        const correctGroupsFlat = Helpers.concatArraysInArray( correctGroups )
-
-        this.setVerifyMode( correctGroupsFlat )
+        if ( ! isNaN( e.key ) && e.key != '0' ) {
+            this.updateCellValue( this.userEditableCell, e.key )
+        }
+        
+        this.highlightCells( this.userEditableCell )
     }
 
     cellEditableListener( e ) {
@@ -119,22 +117,6 @@ export default class Grid {
             this.cells[ i ].classList.remove( 'attached-to-editable' )
             this.cells[ i ].classList.remove( 'incorrect' )
         }
-    }
-
-    handleCellUserInput( e ) {
-        if ( ! ( this.userEditableCell instanceof HTMLElement ) ) {
-            return
-        }
-
-        if ( e.key == 'Backspace' ) {
-            this.updateCellValue( this.userEditableCell, '' )
-        }
-
-        if ( ! isNaN( e.key ) && e.key != '0' ) {
-            this.updateCellValue( this.userEditableCell, e.key )
-        }
-        
-        this.highlightCells( this.userEditableCell )
     }
 
     updateCellValue( cell, value ) {

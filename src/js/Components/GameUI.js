@@ -1,51 +1,58 @@
+import Timer from './Timer.js';
+
 export default class GameUI {
     constructor( grid ) {
         this.grid = grid
     }
 
-    getElements() {
-        const gameButtons = document.createElement( 'div' )
-        gameButtons.id = 'game-ui'
-        gameButtons.append( this.getNewGameButton() )
-        gameButtons.append( this.getDifficultySelector() )
-        gameButtons.append( this.getVerifyButton() )
-        return gameButtons
+    getTopElements() {
+        const elements = document.createElement( 'div' )
+        elements.id = 'game-ui-top'
+        elements.append( new Timer().getTimer() )
+        return elements
+    }
+
+    getBottomElements() {
+        const elements = document.createElement( 'div' )
+        elements.id = 'game-ui-bottom'
+        elements.append( this.getNewGameButton() )
+        elements.append( this.getDifficultySelector() )
+        elements.append( this.getVerifyButton() )
+        return elements
     }
 
     getNewGameButton() {
-        const newGameButton = document.createElement( 'button' )
-        newGameButton.id = 'new-game'
-        newGameButton.innerText = 'New Game'
-        newGameButton.addEventListener( 'click', this.grid.startGame.bind( this.grid ) )
-        return newGameButton
+        this.newGameButton = document.createElement( 'button' )
+        this.newGameButton.id = 'new-game'
+        this.newGameButton.innerText = 'New Game'
+        return this.newGameButton
     }
 
     getDifficultySelector() {
-        const difficultySelector = document.createElement( 'select' )
-        difficultySelector.id = 'difficulty-selector'
-        difficultySelector.append( this.getDifficultyOption( 'easy', true ) )
-        difficultySelector.append( this.getDifficultyOption( 'medium' ) )
-        difficultySelector.append( this.getDifficultyOption( 'hard' ) )
-        return difficultySelector
+        this.difficultySelector = document.createElement( 'select' )
+        this.difficultySelector.id = 'difficulty-selector'
+        this.difficultySelector.append( this.getDifficultyOption( 'easy', true ) )
+        this.difficultySelector.append( this.getDifficultyOption( 'medium' ) )
+        this.difficultySelector.append( this.getDifficultyOption( 'hard' ) )
+        return this.difficultySelector
     }
 
     getDifficultyOption( difficulty, selected = false ) {
-        const difficultyOption = document.createElement( 'option' )
-        difficultyOption.value = difficulty
-        difficultyOption.innerText = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
-        difficultyOption.selected = selected
-        return difficultyOption
+        this.difficultyOption = document.createElement( 'option' )
+        this.difficultyOption.value = difficulty
+        this.difficultyOption.innerText = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+        this.difficultyOption.selected = selected
+        return this.difficultyOption
     }
 
-    static getUserDifficulty() {
+    getUserDifficulty() {
         return document.getElementById( 'difficulty-selector' ).value
     }
 
     getVerifyButton() {
-        const checkButton = document.createElement( 'button' )
-        checkButton.id = 'verify'
-        checkButton.innerText = 'Verify'
-        checkButton.addEventListener( 'click', this.grid.verifyValues.bind( this.grid ) )
-        return checkButton
+        this.checkButton = document.createElement( 'button' )
+        this.checkButton.id = 'verify'
+        this.checkButton.innerText = 'Verify'
+        return this.checkButton
     }
 }

@@ -41,11 +41,11 @@ body {
   font-size: 32px;
   pointer-events: none;
 }
-#grid .group .cell.editable {
-  background-color: #2609cd4e;
-}
 #grid .group .cell.attached-to-editable {
   background-color: #6e5dd12e;
+}
+#grid .group .cell.editable {
+  background-color: #2609cd4e;
 }
 #grid .group .cell.correct {
   background-color: #00e74154;
@@ -54,12 +54,27 @@ body {
   background-color: #e7230054;
 }
 
-#game-ui {
+#game-ui-top {
   display: flex;
   gap: 10px;
   padding: 15px;
 }
-#game-ui button, #game-ui select {
+#game-ui-top button, #game-ui-top select {
+  border: 2px solid #020202;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-color: transparent;
+}
+
+#game-ui-bottom {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+}
+#game-ui-bottom button, #game-ui-bottom select {
   border: 2px solid #020202;
   padding: 10px 20px;
   font-size: 16px;
