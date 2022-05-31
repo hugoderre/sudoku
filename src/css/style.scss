@@ -19,24 +19,24 @@ body {
     #grid {
         display: flex;
         flex-wrap: wrap;
-        width: 488px;
+        width: 650px;
         gap: 4px;
         .group {
             display: flex;
             flex-wrap: wrap;
             gap: 1px;
             border: 1px solid #020202;
-            width: 158px;
-            height:158px;
+            width: 212px;
+            height:212px;
             .cell {
-                width:50px;
-                height:50px;
+                width:68px;
+                height:68px;
                 border: 1px solid #020202;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 span {
-                    font-size: 32px;
+                    font-size: 40px;
                     pointer-events: none;
                 }
                 &.attached-to-editable {
@@ -60,10 +60,12 @@ body {
         justify-content: flex-end;
         #timer {
             display: flex;
+            align-items: center;
             gap: 5px;
-            width: 80px;
+            width: 82px;
             padding-bottom: 5px;
             span {
+                font-size: 20px;
                 vertical-align: middle;
             }
         }
@@ -77,7 +79,7 @@ body {
         button, select {
             border: 2px solid #020202;
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 20px;
             cursor: pointer;
             text-transform: uppercase;
             font-weight: 700;

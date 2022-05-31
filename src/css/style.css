@@ -61,7 +61,7 @@ body {
 #root #grid {
   display: flex;
   flex-wrap: wrap;
-  width: 488px;
+  width: 650px;
   gap: 4px;
 }
 #root #grid .group {
@@ -69,19 +69,19 @@ body {
   flex-wrap: wrap;
   gap: 1px;
   border: 1px solid #020202;
-  width: 158px;
-  height: 158px;
+  width: 212px;
+  height: 212px;
 }
 #root #grid .group .cell {
-  width: 50px;
-  height: 50px;
+  width: 68px;
+  height: 68px;
   border: 1px solid #020202;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 #root #grid .group .cell span {
-  font-size: 32px;
+  font-size: 40px;
   pointer-events: none;
 }
 #root #grid .group .cell.attached-to-editable {
@@ -102,11 +102,13 @@ body {
 }
 #root #game-ui-top #timer {
   display: flex;
+  align-items: center;
   gap: 5px;
-  width: 80px;
+  width: 82px;
   padding-bottom: 5px;
 }
 #root #game-ui-top #timer span {
+  font-size: 20px;
   vertical-align: middle;
 }
 #root #game-ui-bottom {
@@ -118,7 +120,7 @@ body {
 #root #game-ui-bottom button, #root #game-ui-bottom select {
   border: 2px solid #020202;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: 700;
