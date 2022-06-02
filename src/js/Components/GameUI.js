@@ -5,6 +5,10 @@ export default class GameUI {
         this.grid = grid
     }
 
+    showWinMessage( time ) {
+        console.log( 'You Win! Time: ' + time )
+    }
+
     getTopElements() {
         const elements = document.createElement( 'div' )
         elements.id = 'game-ui-top'
@@ -35,6 +39,7 @@ export default class GameUI {
         this.difficultySelector.append( this.getDifficultyOption( 'easy', true ) )
         this.difficultySelector.append( this.getDifficultyOption( 'medium' ) )
         this.difficultySelector.append( this.getDifficultyOption( 'hard' ) )
+        this.difficultySelector.append( this.getDifficultyOption( 'show-all' ) )
         return this.difficultySelector
     }
 

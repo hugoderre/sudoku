@@ -32,7 +32,7 @@ export default class Generator {
             this.grid.updateCellValue(this.grid.cells[i], groupsFlat[i])
         }
 
-        this.hideSomeCellsInGroups()
+        // this.hideSomeCellsInGroups()
         
         return this.gridValues
     }
@@ -92,11 +92,11 @@ export default class Generator {
     hideSomeCellsInGroups() {
         let numbersPerGroupToHide;
         switch (this.difficulty) {
-            case 'no-hide':
+            case 'show-all':
                 numbersPerGroupToHide = 0
                 break
             case 'easy':
-                numbersPerGroupToHide = 3
+                numbersPerGroupToHide = 1
                 break
             case 'medium':
                 numbersPerGroupToHide = 4

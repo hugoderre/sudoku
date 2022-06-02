@@ -7,7 +7,6 @@ export default class Grid {
         this.correctValues = []
         this.checkMode = true
         this.DOMContainer = this.initBoard()
-        document.addEventListener( 'keydown', this.handleCellUserInput.bind( this ) )
     }
 
     getBoard() {
@@ -33,22 +32,6 @@ export default class Grid {
         }
 
         return grid;
-    }
-
-    handleCellUserInput( e ) {
-        if ( ! ( this.userEditableCell instanceof HTMLElement ) ) {
-            return
-        }
-
-        if ( e.key == 'Backspace' ) {
-            this.updateCellValue( this.userEditableCell, '' )
-        }
-
-        if ( ! isNaN( e.key ) && e.key != '0' ) {
-            this.updateCellValue( this.userEditableCell, e.key )
-        }
-        
-        this.highlightCells( this.userEditableCell )
     }
 
     cellEditableListener( e ) {
@@ -190,12 +173,43 @@ export default class Grid {
         return parseInt( cell.parentNode.dataset.groupIndex )
     }
 
-    setVerifyMode( correctValues ) {
-        for (let i = 0; i < correctValues.length; i++) {
+    isGridFullyFilled() {
+        for ( const cell of this.cells ) {
+            if ( ! this.getCellValue( cell ) ) {
+                return false
+            }
+        }
+        return true
+    }
+
+    isGridSolved() {
+        if( ! this.correctValues ) {
+            return
+        }
+        const correctGroups = Helpers.convertRowValuesToGroupedValues( this.correctValues )
+        const correctGroupsFlat = Helpers.concatArraysInArray( correctGroups )
+        for (let i = 0; i < correctGroupsFlat.length; i++) {
             const cell = this.cells[i]
-            const cellValue = this.getCellValue( cell )
+            if ( ! this.getCellValue( cell ) ) {
+                return
+            }
+            if ( this.getCellValue( cell ) != correctGroupsFlat[i] ) {
+                return
+            }
+        }
+        return true
+    }
+
+    setVerifyMode() {
+        if( ! this.correctValues ) {
+            return
+        }
+        const correctGroups = Helpers.convertRowValuesToGroupedValues( this.correctValues )
+        const correctGroupsFlat = Helpers.concatArraysInArray( correctGroups )
+        for (let i = 0; i < correctGroupsFlat.length; i++) {
+            const cell = this.cells[i]
             cell.classList.add( 
-                cellValue == correctValues[i] ? 'correct' : 'incorrect'
+                this.getCellValue( cell ) == correctGroupsFlat[i] ? 'correct' : 'incorrect'
             )
         }
     }
@@ -204,6 +218,12 @@ export default class Grid {
         for ( let i = 0; i < this.cells.length; i++ ) {
             this.cells[ i ].classList.remove( 'correct' )   
             this.cells[ i ].classList.remove( 'incorrect' )   
+        }
+    }
+
+    setCellsInStaticMode() {
+        for ( let i = 0; i < this.cells.length; i++ ) {
+            this.cells[ i ].classList.add( 'static' )
         }
     }
 

@@ -21,13 +21,18 @@ export default class Timer {
 
     start() {
         this.reset()
+        this.time-- // To make sure the timer starts at 0
         this.update() // Run directly once to update the timer
         this.tick = setInterval( this.update.bind( this ), 1000 )
     }
 
     update() {
-        this.timerSpan.innerText = this.getTime()
         this.time++
+        this.timerSpan.innerText = this.getTime()
+    }
+
+    stop() {
+        clearInterval( this.tick )
     }
 
     reset() {
