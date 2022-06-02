@@ -32,7 +32,7 @@ export default class Generator {
             this.grid.updateCellValue(this.grid.cells[i], groupsFlat[i])
         }
 
-        // this.hideSomeCellsInGroups()
+        this.hideSomeCellsInGroups()
         
         return this.gridValues
     }
