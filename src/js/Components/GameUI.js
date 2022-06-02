@@ -39,7 +39,7 @@ export default class GameUI {
         this.difficultySelector.append( this.getDifficultyOption( 'easy', true ) )
         this.difficultySelector.append( this.getDifficultyOption( 'medium' ) )
         this.difficultySelector.append( this.getDifficultyOption( 'hard' ) )
-        this.difficultySelector.append( this.getDifficultyOption( 'show-all' ) )
+        // this.difficultySelector.append( this.getDifficultyOption( 'show-all' ) )
         return this.difficultySelector
     }
 

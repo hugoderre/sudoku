@@ -96,7 +96,7 @@ export default class Generator {
                 numbersPerGroupToHide = 0
                 break
             case 'easy':
-                numbersPerGroupToHide = 1
+                numbersPerGroupToHide = 3
                 break
             case 'medium':
                 numbersPerGroupToHide = 4
