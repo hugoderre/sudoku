@@ -30,7 +30,7 @@ export default class Grid {
             }
             grid.append( groupElement )
         }
-
+        this.setCellsInStaticMode()
         return grid;
     }
 
