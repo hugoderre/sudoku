@@ -161,6 +161,7 @@ html, body {
   padding: 15px;
 }
 #root .container #game-ui-bottom button, #root .container #game-ui-bottom select {
+  color: #020202;
   border: 2px solid #020202;
   padding: 10px 20px;
   font-size: 20px;
@@ -168,6 +169,7 @@ html, body {
   text-transform: uppercase;
   font-weight: 700;
   background-color: transparent;
+  text-align: center;
 }
 @media (max-width: 650px) {
   #root .container #game-ui-bottom button, #root .container #game-ui-bottom select {
