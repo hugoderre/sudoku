@@ -61,7 +61,7 @@ html, body {
   display: grid;
   grid-template-rows: 1fr 650px 2fr;
   width: 650px;
-  padding-top: min(50px, 0%);
+  padding-top: min(50px, 5%);
 }
 @media (max-width: 650px) {
   #root .container {
