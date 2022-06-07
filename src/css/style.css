@@ -137,6 +137,9 @@ html, body {
 #root .container #grid .group .cell.incorrect {
   background-color: #e7230054;
 }
+#root .container #grid .group .cell:not(.static) {
+  color: #020c99;
+}
 #root .container #game-ui-top {
   margin: auto;
   display: flex;
