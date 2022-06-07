@@ -17,22 +17,22 @@ html, body {
 
     .container {
         display: grid;
-        grid-template-rows: 0.5fr 650px 0.5fr;
+        grid-template-rows: 1fr 650px 2fr;
         width: 650px;
-        padding-top: min(50px, 5%);
+        padding-top: min(50px, 0%);
 
         @media (max-width: 650px) {
             max-width: 500px;
-            max-height: 500px;
+            grid-template-rows: 1fr 500px 2fr;
         }
 
         @media (max-width: 500px) {
             max-width: 400px;
-            max-height: 400px;
+            grid-template-rows: 1fr 400px 2fr;
         }
         @media (max-width: 390px) {
             max-width: 350px;
-            max-height: 350px;
+            grid-template-rows: 1fr 350px 2fr;
         }
 
         & > div {
