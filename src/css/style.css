@@ -43,7 +43,7 @@
   border-radius: 100px;
 }
 
-body {
+html, body {
   font-family: "Inter", sans-serif;
   margin: 0;
 }
@@ -55,69 +55,112 @@ body {
   align-items: center;
   background-color: #D9AFD9;
   background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
-  height: 100vh;
-  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
 }
-#root #grid {
-  display: flex;
-  flex-wrap: wrap;
+#root .container {
   width: 650px;
-  gap: 4px;
+  height: 650px;
 }
-#root #grid .group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1px;
+@media (max-width: 650px) {
+  #root .container {
+    max-width: 500px;
+    max-height: 500px;
+  }
+}
+@media (max-width: 500px) {
+  #root .container {
+    max-width: 400px;
+    max-height: 400px;
+  }
+}
+@media (max-width: 390px) {
+  #root .container {
+    max-width: 350px;
+    max-height: 350px;
+  }
+}
+#root .container > div {
+  margin: auto;
+}
+#root .container #grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  width: 100%;
+  height: 100%;
+}
+#root .container #grid .group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   border: 1px solid #020202;
-  width: 212px;
-  height: 212px;
 }
-#root #grid .group .cell {
-  width: 68px;
-  height: 68px;
+#root .container #grid .group .cell {
   border: 1px solid #020202;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#root #grid .group .cell span {
+#root .container #grid .group .cell span {
   font-size: 40px;
   pointer-events: none;
 }
-#root #grid .group .cell.attached-to-editable {
+@media (max-width: 650px) {
+  #root .container #grid .group .cell span {
+    font-size: 34px;
+  }
+}
+@media (max-width: 500px) {
+  #root .container #grid .group .cell span {
+    font-size: 30px;
+  }
+}
+@media (max-width: 390px) {
+  #root .container #grid .group .cell span {
+    font-size: 26px;
+  }
+}
+#root .container #grid .group .cell.attached-to-editable {
   background-color: #6e5dd12e;
 }
-#root #grid .group .cell.editable {
+#root .container #grid .group .cell.editable {
   background-color: #2609cd4e;
 }
-#root #grid .group .cell.correct {
+#root .container #grid .group .cell.correct {
   background-color: #00e74154;
 }
-#root #grid .group .cell.incorrect {
+#root .container #grid .group .cell.incorrect {
   background-color: #e7230054;
 }
-#root #game-ui-top {
+#root .container #game-ui-top {
+  margin: auto;
   display: flex;
   justify-content: flex-end;
 }
-#root #game-ui-top #timer {
+#root .container #game-ui-top #timer {
   display: flex;
   align-items: center;
   gap: 5px;
   width: 82px;
   padding-bottom: 5px;
 }
-#root #game-ui-top #timer span {
+#root .container #game-ui-top #timer span {
   font-size: 20px;
   vertical-align: middle;
 }
-#root #game-ui-bottom {
+#root .container #game-ui-bottom {
+  margin: auto;
   display: flex;
   justify-content: center;
   gap: 10px;
   padding: 15px;
 }
-#root #game-ui-bottom button, #root #game-ui-bottom select {
+#root .container #game-ui-bottom button, #root .container #game-ui-bottom select {
   border: 2px solid #020202;
   padding: 10px 20px;
   font-size: 20px;
@@ -125,6 +168,23 @@ body {
   text-transform: uppercase;
   font-weight: 700;
   background-color: transparent;
+}
+@media (max-width: 650px) {
+  #root .container #game-ui-bottom button, #root .container #game-ui-bottom select {
+    font-size: 16px;
+  }
+}
+@media (max-width: 500px) {
+  #root .container #game-ui-bottom button, #root .container #game-ui-bottom select {
+    font-size: 16px;
+    padding: 5px 10px;
+  }
+}
+@media (max-width: 390px) {
+  #root .container #game-ui-bottom button, #root .container #game-ui-bottom select {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
