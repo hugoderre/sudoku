@@ -9,8 +9,18 @@ export default class GameController {
     }
 
     init() {
+        // New game
         this.gameUI.newGameButton.addEventListener( 'click', this.startGame.bind( this ) )
+
+        // Verify values
         this.gameUI.checkButton.addEventListener( 'click', this.verifyValues.bind( this ) )
+
+        // Pad number
+        for( const padNumber of this.gameUI.padNumbers.children ) {
+            padNumber.addEventListener( 'click', this.handlePadNumber.bind( this ) )
+        }
+
+        // User keys inputs
         document.addEventListener( 'keydown', this.handleUserKeyInputs.bind( this ) )
     }
 
@@ -28,6 +38,15 @@ export default class GameController {
         this.grid.clearVerifyMode()
 
         this.grid.setVerifyMode()
+    }
+
+    handlePadNumber( e ) {
+        if ( ! this.grid.userEditableCell ) {
+            return
+        }
+
+        this.grid.updateCellValue( this.grid.userEditableCell, e.target.innerText )
+        this.grid.highlightCells( this.grid.userEditableCell )
     }
 
     handleUserKeyInputs( e ) {

@@ -59,26 +59,32 @@ html, body {
 }
 #root .container {
   display: grid;
-  grid-template-rows: 1fr 650px 2fr;
+  grid-template-rows: 1fr 650px 2fr 2fr;
   width: 650px;
   padding-top: min(50px, 5%);
 }
 @media (max-width: 650px) {
   #root .container {
     max-width: 500px;
-    grid-template-rows: 1fr 500px 2fr;
+    grid-template-rows: 1fr 500px 2fr 2fr;
   }
 }
 @media (max-width: 500px) {
   #root .container {
     max-width: 400px;
-    grid-template-rows: 1fr 400px 2fr;
+    grid-template-rows: 1fr 400px 2fr 2fr;
   }
 }
 @media (max-width: 390px) {
   #root .container {
     max-width: 350px;
-    grid-template-rows: 1fr 350px 2fr;
+    grid-template-rows: 1fr 350px 2fr 2fr;
+  }
+}
+@media (max-width: 350px) {
+  #root .container {
+    max-width: 250px;
+    grid-template-rows: 1fr 250px 2fr 2fr;
   }
 }
 #root .container > div {
@@ -120,6 +126,11 @@ html, body {
 @media (max-width: 390px) {
   #root .container #grid .group .cell span {
     font-size: 26px;
+  }
+}
+@media (max-width: 350px) {
+  #root .container #grid .group .cell span {
+    font-size: 22px;
   }
 }
 #root .container #grid .group .cell.attached-to-editable {
@@ -187,6 +198,61 @@ html, body {
     font-size: 14px;
     padding: 5px 10px;
   }
+}
+@media (max-width: 350px) {
+  #root .container #game-ui-bottom button, #root .container #game-ui-bottom select {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+}
+#root .container #pad-numbers {
+  display: flex;
+  gap: 5px;
+  padding-top: 10px;
+}
+#root .container #pad-numbers > div {
+  display: flex;
+  justify-content: center;
+  background-color: #6c65d534;
+  width: 68px;
+  height: 68px;
+  font-size: 32px;
+}
+@media (max-width: 650px) {
+  #root .container #pad-numbers > div {
+    width: 51px;
+    height: 51px;
+    font-size: 26px;
+  }
+}
+@media (max-width: 500px) {
+  #root .container #pad-numbers > div {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+}
+@media (max-width: 390px) {
+  #root .container #pad-numbers > div {
+    width: 34.5px;
+    height: 34.5px;
+    font-size: 19px;
+  }
+}
+@media (max-width: 350px) {
+  #root .container #pad-numbers > div {
+    width: 23.5px;
+    height: 23.5px;
+    font-size: 16px;
+  }
+}
+#root .container #pad-numbers > div > span {
+  display: flex;
+  align-self: center;
+  pointer-events: none;
+}
+#root .container #pad-numbers > div:hover {
+  background-color: #6c65d550;
 }
 
 /*# sourceMappingURL=style.css.map */
