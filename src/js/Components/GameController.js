@@ -40,9 +40,8 @@ export default class GameController {
         if ( !this.grid.correctValues ) {
             return
         }
-        this.grid.unsetEditableCell()
-        this.grid.clearVerifyMode()
 
+        this.grid.clearVerifyMode()
         this.grid.setVerifyMode()
     }
 
@@ -70,10 +69,9 @@ export default class GameController {
         }
 
         const editableCellIndex = this.grid.cells.indexOf( this.grid.userEditableCell )
-        // const correctGroups = Helpers.convertRowValuesToGroupedValues( this.grid.correctValues )
-        // const correctValuesFlat = Helpers.concatArraysInArray( correctGroups )
         this.grid.updateCellValue( this.grid.userEditableCell, this.grid.correctValues[ editableCellIndex ] )
         this.grid.highlightCells( this.grid.userEditableCell )
+        this.handleMaybeSolvedGrid()
     }
 
     handleUserKeyInputs( e ) {
@@ -90,14 +88,23 @@ export default class GameController {
         }
 
         this.grid.highlightCells( this.grid.userEditableCell )
+        this.handleMaybeSolvedGrid()
+    }
 
+
+    handleMaybeSolvedGrid() {
         if ( this.grid.isGridSolved() ) {
-            this.grid.setVerifyMode()
-            this.gameUI.timer.stop()
-            this.gameUI.showWinMessage( this.gameUI.timer.getTime() )
-            this.grid.setCellsInStaticMode()
+            this.gameWon()
         } else if ( this.grid.isGridFullyFilled() ) {
             this.verifyValues()
         }
+    }
+
+    gameWon() {
+        this.grid.setVerifyMode()
+        this.gameUI.timer.stop()
+        this.gameUI.showWinMessage( this.gameUI.timer.getTime() )
+        this.grid.setCellsInStaticMode()
+        this.grid.unsetEditableCell()
     }
 }
