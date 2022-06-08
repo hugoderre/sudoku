@@ -18,6 +18,13 @@ export default class GameUI {
         return elements
     }
 
+    getBottomElements() {
+        const elements = document.createElement( 'div' )
+        elements.id = 'game-ui-bottom'
+        elements.append( this.getPadNumbers() )
+        return elements
+    }
+
     getButtonsElements() {
         const elements = document.createElement( 'div' )
         elements.id = 'game-ui-buttons'
@@ -30,7 +37,7 @@ export default class GameUI {
     getPadNumbers() {
         this.padNumbers = document.createElement( 'div' )
         this.padNumbers.id = 'pad-numbers'
-        for (let number = 1; number <= 9; number++) {
+        for ( let number = 1; number <= 9; number++ ) {
             this.padNumbers.append( this.getPadNumber( number ) )
         }
         return this.padNumbers
@@ -63,7 +70,7 @@ export default class GameUI {
     getDifficultyOption( difficulty, selected = false ) {
         this.difficultyOption = document.createElement( 'option' )
         this.difficultyOption.value = difficulty
-        this.difficultyOption.innerText = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+        this.difficultyOption.innerText = difficulty.charAt( 0 ).toUpperCase() + difficulty.slice( 1 );
         this.difficultyOption.selected = selected
         return this.difficultyOption
     }
