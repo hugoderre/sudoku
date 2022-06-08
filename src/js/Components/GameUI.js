@@ -18,13 +18,6 @@ export default class GameUI {
         return elements
     }
 
-    getBottomElements() {
-        const elements = document.createElement( 'div' )
-        elements.id = 'game-ui-bottom'
-        elements.append( this.getPadNumbers() )
-        return elements
-    }
-
     getButtonsElements() {
         const elements = document.createElement( 'div' )
         elements.id = 'game-ui-buttons'
@@ -32,23 +25,6 @@ export default class GameUI {
         elements.append( this.getDifficultySelector() )
         elements.append( this.getVerifyButton() )
         return elements
-    }
-
-    getPadNumbers() {
-        this.padNumbers = document.createElement( 'div' )
-        this.padNumbers.id = 'pad-numbers'
-        for ( let number = 1; number <= 9; number++ ) {
-            this.padNumbers.append( this.getPadNumber( number ) )
-        }
-        return this.padNumbers
-    }
-
-    getPadNumber( number ) {
-        const padNumber = document.createElement( 'div' )
-        const padNumberSpan = document.createElement( 'span' )
-        padNumberSpan.innerText = number
-        padNumber.append( padNumberSpan )
-        return padNumber
     }
 
     getNewGameButton() {
@@ -84,5 +60,56 @@ export default class GameUI {
         this.checkButton.id = 'verify'
         this.checkButton.innerText = 'Verify'
         return this.checkButton
+    }
+
+    getBottomElements() {
+        const elements = document.createElement( 'div' )
+        elements.id = 'game-ui-bottom'
+        elements.append( this.getPadNumbers() )
+        elements.append( this.getGridCellActionsButtons() )
+        return elements
+    }
+
+    getPadNumbers() {
+        this.padNumbers = document.createElement( 'div' )
+        this.padNumbers.id = 'pad-numbers'
+        for ( let number = 1; number <= 9; number++ ) {
+            this.padNumbers.append( this.getPadNumber( number ) )
+        }
+        return this.padNumbers
+    }
+
+    getPadNumber( number ) {
+        const padNumber = document.createElement( 'div' )
+        const padNumberSpan = document.createElement( 'span' )
+        padNumberSpan.innerText = number
+        padNumber.append( padNumberSpan )
+        return padNumber
+    }
+
+    getGridCellActionsButtons() {
+        const elements = document.createElement( 'div' )
+        elements.id = 'grid-actions-buttons'
+        elements.append( this.getCellClearButton() )
+        elements.append( this.getCellTipButton() )
+        return elements
+    }
+
+    getCellClearButton() {
+        this.clearCellButton = document.createElement( 'div' )
+        this.clearCellButton.id = 'cell-clear'
+        const clearCellButtonSpan = document.createElement( 'span' )
+        clearCellButtonSpan.innerText = 'Clear'
+        this.clearCellButton.append( clearCellButtonSpan )
+        return this.clearCellButton
+    }
+
+    getCellTipButton() {
+        this.tipCellButton = document.createElement( 'div' )
+        this.tipCellButton.id = 'cell-tip'
+        const tipCellButtonSpan = document.createElement( 'span' )
+        tipCellButtonSpan.innerText = 'Tip'
+        this.tipCellButton.append( tipCellButtonSpan )
+        return this.tipCellButton
     }
 }

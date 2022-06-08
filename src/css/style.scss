@@ -18,25 +18,25 @@ body {
 
     .container {
         display: grid;
-        grid-template-rows: 1fr 650px 1fr;
+        grid-template-rows: 2fr 650px 3fr;
         width: 650px;
         padding-top: min(50px, 5%);
 
         @media (max-width: 650px) {
             max-width: 500px;
-            grid-template-rows: 1fr 500px 1fr;
+            grid-template-rows: 2fr 500px 3fr;
         }
         @media (max-width: 500px) {
             max-width: 400px;
-            grid-template-rows: 1fr 400px 1fr;
+            grid-template-rows: 2fr 400px 3fr;
         }
         @media (max-width: 390px) {
             max-width: 350px;
-            grid-template-rows: 1fr 350px 1fr;
+            grid-template-rows: 2fr 350px 3fr;
         }
         @media (max-width: 350px) {
             max-width: 250px;
-            grid-template-rows: 1fr 250px 1fr;
+            grid-template-rows: 2fr 250px 3fr;
         }
 
         & > div {
@@ -171,7 +171,8 @@ body {
             }
         }
 
-        #pad-numbers {
+        #pad-numbers,
+        #grid-actions-buttons {
             display: flex;
             gap: 5px;
             padding-top: 10px;
@@ -212,6 +213,10 @@ body {
             & > div:hover {
                 background-color: #6c65d550;
             }
+        }
+
+        #grid-actions-buttons {
+            justify-content: center;
         }
     }
 }
