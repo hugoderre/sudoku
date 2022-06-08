@@ -99,7 +99,7 @@ export default class GameUI {
         this.clearCellButton = document.createElement( 'div' )
         this.clearCellButton.id = 'cell-clear'
         const clearCellButtonSpan = document.createElement( 'span' )
-        clearCellButtonSpan.innerText = 'Clear'
+        clearCellButtonSpan.innerHTML = '<i class="fa-solid fa-eraser"></i>'
         this.clearCellButton.append( clearCellButtonSpan )
         return this.clearCellButton
     }
@@ -108,7 +108,7 @@ export default class GameUI {
         this.tipCellButton = document.createElement( 'div' )
         this.tipCellButton.id = 'cell-tip'
         const tipCellButtonSpan = document.createElement( 'span' )
-        tipCellButtonSpan.innerText = 'Tip'
+        tipCellButtonSpan.innerHTML = '<i class="fa-solid fa-lightbulb"></i>'
         this.tipCellButton.append( tipCellButtonSpan )
         return this.tipCellButton
     }
