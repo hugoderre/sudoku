@@ -13,13 +13,13 @@ export default class Generator {
             this.shuffleDigits()
         }
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 20; i++) {
             this.shuffleRows([0, 2])
             this.shuffleRows([3, 5])
             this.shuffleRows([6, 8])
         }
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 20; i++) {
             this.shuffleColumns([0, 2])
             this.shuffleColumns([3, 5])
             this.shuffleColumns([6, 8])
