@@ -19,6 +19,9 @@ export default class GameController {
             padNumber.addEventListener( 'click', this.handlePadNumber.bind( this ) )
         }
 
+        // Erase cell button
+        this.gameUI.eraseCellButton.addEventListener( 'click', this.handleEraseCell.bind( this ) )
+
         // User keys inputs
         document.addEventListener( 'keydown', this.handleUserKeyInputs.bind( this ) )
     }
@@ -45,6 +48,15 @@ export default class GameController {
         }
 
         this.grid.updateCellValue( this.grid.userEditableCell, e.target.innerText )
+        this.grid.highlightCells( this.grid.userEditableCell )
+    }
+
+    handleEraseCell() {
+        if ( !this.grid.userEditableCell ) {
+            return
+        }
+
+        this.grid.updateCellValue( this.grid.userEditableCell, '' )
         this.grid.highlightCells( this.grid.userEditableCell )
     }
 

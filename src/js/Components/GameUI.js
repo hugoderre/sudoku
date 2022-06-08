@@ -90,18 +90,18 @@ export default class GameUI {
     getGridCellActionsButtons() {
         const elements = document.createElement( 'div' )
         elements.id = 'grid-actions-buttons'
-        elements.append( this.getCellClearButton() )
+        elements.append( this.getCellEraseButton() )
         elements.append( this.getCellTipButton() )
         return elements
     }
 
-    getCellClearButton() {
-        this.clearCellButton = document.createElement( 'div' )
-        this.clearCellButton.id = 'cell-clear'
-        const clearCellButtonSpan = document.createElement( 'span' )
-        clearCellButtonSpan.innerHTML = '<i class="fa-solid fa-eraser"></i>'
-        this.clearCellButton.append( clearCellButtonSpan )
-        return this.clearCellButton
+    getCellEraseButton() {
+        this.eraseCellButton = document.createElement( 'div' )
+        this.eraseCellButton.id = 'cell-erase'
+        const eraseCellButtonSpan = document.createElement( 'span' )
+        eraseCellButtonSpan.innerHTML = '<i class="fa-solid fa-eraser"></i>'
+        this.eraseCellButton.append( eraseCellButtonSpan )
+        return this.eraseCellButton
     }
 
     getCellTipButton() {
