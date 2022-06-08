@@ -1,5 +1,4 @@
 import Generator from "./Generator.js"
-import Helpers from "./Helpers.js"
 
 export default class GameController {
     constructor( grid, gameUI ) {

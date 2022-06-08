@@ -9,7 +9,6 @@ class App {
     }
 
     init() {
-
         this.container = document.createElement( 'div' )
         this.container.classList.add('container')
 
