@@ -25,16 +25,16 @@ export default class Generator {
             this.shuffleColumns( [ 6, 8 ] )
         }
 
-        const groups = Helpers.convertRowValuesToGroupedValues( this.gridValues )
-        const groupsFlat = Helpers.concatArraysInArray( groups )
+        // Format grid values order to match the grid
+        const correctValues = Helpers.concatArraysInArray( Helpers.convertRowValuesToGroupedValues( this.gridValues ) )
 
-        for ( let i = 0; i < groupsFlat.length; i++ ) {
-            this.grid.updateCellValue( this.grid.cells[ i ], groupsFlat[ i ] )
+        for ( let i = 0; i < correctValues.length; i++ ) {
+            this.grid.updateCellValue( this.grid.cells[ i ], correctValues[ i ] )
         }
 
         this.hideSomeCellsInGroups()
 
-        return this.gridValues
+        return correctValues
     }
 
     getBaseGrid() {

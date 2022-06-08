@@ -186,14 +186,13 @@ export default class Grid {
         if ( !this.correctValues ) {
             return
         }
-        const correctGroups = Helpers.convertRowValuesToGroupedValues( this.correctValues )
-        const correctGroupsFlat = Helpers.concatArraysInArray( correctGroups )
-        for ( let i = 0; i < correctGroupsFlat.length; i++ ) {
+
+        for ( let i = 0; i < this.correctValues.length; i++ ) {
             const cell = this.cells[ i ]
             if ( !this.getCellValue( cell ) ) {
                 return
             }
-            if ( this.getCellValue( cell ) != correctGroupsFlat[ i ] ) {
+            if ( this.getCellValue( cell ) != this.correctValues[ i ] ) {
                 return
             }
         }
@@ -204,12 +203,11 @@ export default class Grid {
         if ( !this.correctValues ) {
             return
         }
-        const correctGroups = Helpers.convertRowValuesToGroupedValues( this.correctValues )
-        const correctGroupsFlat = Helpers.concatArraysInArray( correctGroups )
-        for ( let i = 0; i < correctGroupsFlat.length; i++ ) {
+
+        for ( let i = 0; i < this.correctValues.length; i++ ) {
             const cell = this.cells[ i ]
             cell.classList.add(
-                this.getCellValue( cell ) == correctGroupsFlat[ i ] ? 'correct' : 'incorrect'
+                this.getCellValue( cell ) == this.correctValues[ i ] ? 'correct' : 'incorrect'
             )
         }
     }

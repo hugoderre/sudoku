@@ -1,4 +1,5 @@
 import Generator from "./Generator.js"
+import Helpers from "./Helpers.js"
 
 export default class GameController {
     constructor( grid, gameUI ) {
@@ -19,8 +20,11 @@ export default class GameController {
             padNumber.addEventListener( 'click', this.handlePadNumber.bind( this ) )
         }
 
-        // Erase cell button
-        this.gameUI.eraseCellButton.addEventListener( 'click', this.handleEraseCell.bind( this ) )
+        // Cell erase button
+        this.gameUI.cellEraseButton.addEventListener( 'click', this.handleCellErase.bind( this ) )
+
+        // Cell tip button
+        this.gameUI.tipCellButton.addEventListener( 'click', this.handleCellTip.bind( this ) )
 
         // User keys inputs
         document.addEventListener( 'keydown', this.handleUserKeyInputs.bind( this ) )
@@ -51,12 +55,24 @@ export default class GameController {
         this.grid.highlightCells( this.grid.userEditableCell )
     }
 
-    handleEraseCell() {
+    handleCellErase() {
         if ( !this.grid.userEditableCell ) {
             return
         }
 
         this.grid.updateCellValue( this.grid.userEditableCell, '' )
+        this.grid.highlightCells( this.grid.userEditableCell )
+    }
+
+    handleCellTip() {
+        if ( !this.grid.userEditableCell ) {
+            return
+        }
+
+        const editableCellIndex = this.grid.cells.indexOf( this.grid.userEditableCell )
+        // const correctGroups = Helpers.convertRowValuesToGroupedValues( this.grid.correctValues )
+        // const correctValuesFlat = Helpers.concatArraysInArray( correctGroups )
+        this.grid.updateCellValue( this.grid.userEditableCell, this.grid.correctValues[ editableCellIndex ] )
         this.grid.highlightCells( this.grid.userEditableCell )
     }
 

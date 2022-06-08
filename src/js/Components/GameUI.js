@@ -96,12 +96,12 @@ export default class GameUI {
     }
 
     getCellEraseButton() {
-        this.eraseCellButton = document.createElement( 'div' )
-        this.eraseCellButton.id = 'cell-erase'
-        const eraseCellButtonSpan = document.createElement( 'span' )
-        eraseCellButtonSpan.innerHTML = '<i class="fa-solid fa-eraser"></i>'
-        this.eraseCellButton.append( eraseCellButtonSpan )
-        return this.eraseCellButton
+        this.cellEraseButton = document.createElement( 'div' )
+        this.cellEraseButton.id = 'cell-erase'
+        const cellEraseButtonSpan = document.createElement( 'span' )
+        cellEraseButtonSpan.innerHTML = '<i class="fa-solid fa-eraser"></i>'
+        this.cellEraseButton.append( cellEraseButtonSpan )
+        return this.cellEraseButton
     }
 
     getCellTipButton() {
