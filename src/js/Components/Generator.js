@@ -88,16 +88,16 @@ export default class Generator {
     }
 
     hideSomeCellsInGroups() {
-        let numbersPerGroupToHide;
+        let cellQuantityPerGroupToHide;
         switch ( this.difficulty ) {
             case 'easy':
-                numbersPerGroupToHide = 4
+                cellQuantityPerGroupToHide = 4
                 break
             case 'medium':
-                numbersPerGroupToHide = 5
+                cellQuantityPerGroupToHide = 5
                 break
             case 'hard':
-                numbersPerGroupToHide = 6
+                cellQuantityPerGroupToHide = 6
                 break
             default:
                 break
@@ -108,7 +108,7 @@ export default class Generator {
         for ( let i = 0; i < this.grid.cells.length; i++ ) {
             if ( i % 9 === 0 ) {
                 indexesToHide = []
-                for ( let j = 0; j < numbersPerGroupToHide; j++ ) {
+                for ( let j = 0; j < cellQuantityPerGroupToHide; j++ ) {
                     let randomIndex = Math.floor( Math.random() * possibleIndex.length )
                     indexesToHide.push( possibleIndex[ randomIndex ] );
                     possibleIndex.splice( possibleIndex.indexOf( possibleIndex[ randomIndex ] ), 1 )
