@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap');
-@import './modules/timer';
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap");
+@import "./modules/timer";
 
-html, body {
-    font-family: 'Inter', sans-serif;
+html,
+body {
+    font-family: "Inter", sans-serif;
     margin: 0;
 }
 
@@ -11,8 +12,8 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #D9AFD9;
-    background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+    background-color: #d9afd9;
+    background-image: linear-gradient(0deg, #d9afd9 0%, #97d9e1 100%);
     min-height: 100vh;
 
     .container {
@@ -25,7 +26,6 @@ html, body {
             max-width: 500px;
             grid-template-rows: 1fr 500px 1fr;
         }
-
         @media (max-width: 500px) {
             max-width: 400px;
             grid-template-rows: 1fr 400px 1fr;
@@ -34,7 +34,6 @@ html, body {
             max-width: 350px;
             grid-template-rows: 1fr 350px 1fr;
         }
-
         @media (max-width: 350px) {
             max-width: 250px;
             grid-template-rows: 1fr 250px 1fr;
@@ -43,7 +42,7 @@ html, body {
         & > div {
             margin: auto;
         }
-    
+
         #grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -130,7 +129,7 @@ html, body {
                 }
             }
         }
-        
+
         #game-ui-buttons {
             display: flex;
             justify-content: center;
@@ -138,7 +137,8 @@ html, body {
             @media (max-width: 350px) {
                 gap: 4px;
             }
-            button, select {
+            button,
+            select {
                 color: #020202;
                 border: 2px solid #020202;
                 padding: 10px 20px;
@@ -164,7 +164,6 @@ html, body {
                     font-size: 10px;
                     padding: 0px 10px;
                 }
-
                 @media (max-width: 350px) {
                     font-size: 8.5px;
                     padding: 0px 10px;
@@ -216,5 +215,3 @@ html, body {
         }
     }
 }
-
-
