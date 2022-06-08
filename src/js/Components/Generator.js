@@ -92,17 +92,14 @@ export default class Generator {
     hideSomeCellsInGroups() {
         let numbersPerGroupToHide;
         switch (this.difficulty) {
-            case 'show-all':
-                numbersPerGroupToHide = 0
-                break
             case 'easy':
-                numbersPerGroupToHide = 3
-                break
-            case 'medium':
                 numbersPerGroupToHide = 4
                 break
-            case 'hard':
+            case 'medium':
                 numbersPerGroupToHide = 5
+                break
+            case 'hard':
+                numbersPerGroupToHide = 6
                 break
             default:
                 break
@@ -116,7 +113,7 @@ export default class Generator {
                 for (let j = 0; j < numbersPerGroupToHide; j++) {
                     let randomIndex = Math.floor(Math.random() * possibleIndex.length)
                     indexesToHide.push(possibleIndex[randomIndex]);
-                    possibleIndex.splice(possibleIndex.indexOf(randomIndex), 1)
+                    possibleIndex.splice(possibleIndex.indexOf(possibleIndex[randomIndex]), 1)
                 }
                 possibleIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8]
             }
