@@ -18,25 +18,25 @@ body {
 
     .container {
         display: grid;
-        grid-template-rows: 2fr 650px 3fr;
+        grid-template-rows: 2fr 650px 5fr;
         width: 650px;
         padding-top: min(50px, 5%);
 
         @media (max-width: 650px) {
             max-width: 500px;
-            grid-template-rows: 2fr 500px 3fr;
+            grid-template-rows: 2fr 500px 5fr;
         }
         @media (max-width: 500px) {
             max-width: 400px;
-            grid-template-rows: 2fr 400px 3fr;
+            grid-template-rows: 2fr 400px 5fr;
         }
         @media (max-width: 390px) {
             max-width: 350px;
-            grid-template-rows: 2fr 350px 3fr;
+            grid-template-rows: 2fr 350px 5fr;
         }
         @media (max-width: 350px) {
             max-width: 250px;
-            grid-template-rows: 2fr 250px 3fr;
+            grid-template-rows: 2fr 250px 5fr;
         }
 
         & > div {
