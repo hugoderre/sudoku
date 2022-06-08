@@ -103,17 +103,17 @@ export default class Generator {
                 break
         }
 
-        let possibleIndex = [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
+        let possibleIndexes = [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
         let indexesToHide
         for ( let i = 0; i < this.grid.cells.length; i++ ) {
             if ( i % 9 === 0 ) {
                 indexesToHide = []
                 for ( let j = 0; j < cellQuantityPerGroupToHide; j++ ) {
-                    let randomIndex = Math.floor( Math.random() * possibleIndex.length )
-                    indexesToHide.push( possibleIndex[ randomIndex ] );
-                    possibleIndex.splice( possibleIndex.indexOf( possibleIndex[ randomIndex ] ), 1 )
+                    let randomIndex = Math.floor( Math.random() * possibleIndexes.length )
+                    indexesToHide.push( possibleIndexes[ randomIndex ] );
+                    possibleIndexes.splice( possibleIndexes.indexOf( possibleIndexes[ randomIndex ] ), 1 )
                 }
-                possibleIndex = [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
+                possibleIndexes = [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
             }
             if ( indexesToHide.includes( i % 9 ) ) {
                 this.grid.updateCellValue( this.grid.cells[ i ], null ) // Values to find
