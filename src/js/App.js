@@ -10,7 +10,7 @@ class App {
 
     init() {
         this.container = document.createElement( 'div' )
-        this.container.classList.add('container')
+        this.container.classList.add( 'container' )
 
         this.grid = new Grid()
         this.container.append( this.grid.getBoard() )

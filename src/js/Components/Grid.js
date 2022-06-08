@@ -36,7 +36,7 @@ export default class Grid {
 
     cellEditableListener( e ) {
         // Return if player click on a static cell
-        if ( e.target.classList.contains('static') ) {
+        if ( e.target.classList.contains( 'static' ) ) {
             return
         }
 
@@ -45,7 +45,7 @@ export default class Grid {
         if ( this.userEditableCell ) {
             this.unsetEditableCell()
         }
-        
+
         this.setEditableCell( e.target )
     }
 
@@ -73,13 +73,13 @@ export default class Grid {
     highlightAttachedCells( cell ) {
         const attachedCells = this.getCellsAttachedToEditableCell( cell )
         for ( let i = 0; i < attachedCells.length; i++ ) {
-            attachedCells[i].classList.add( 'attached-to-editable' )
+            attachedCells[ i ].classList.add( 'attached-to-editable' )
         }
     }
 
     highlightAllConflictCells() {
-        for (const cell of this.cells) {
-            if ( ! this.getCellValue( cell ) ) {
+        for ( const cell of this.cells ) {
+            if ( !this.getCellValue( cell ) ) {
                 continue
             }
             let siblingCells = [
@@ -130,7 +130,7 @@ export default class Grid {
 
     getRowOfCells( cell ) {
         const rowIndex = this.getRowIndex( cell )
-        
+
         return this.cells.filter( ( cell ) => {
             return this.getRowIndex( cell ) == rowIndex
         } )
@@ -138,7 +138,7 @@ export default class Grid {
 
     getColumnOfCells( cell ) {
         const columnIndex = this.getColumnIndex( cell )
-        
+
         return this.cells.filter( ( cell ) => {
             return this.getColumnIndex( cell ) == columnIndex
         } )
@@ -146,7 +146,7 @@ export default class Grid {
 
     getCellsWithSameValue( cell ) {
         const value = this.getCellValue( cell )
-        if ( ! value ) {
+        if ( !value ) {
             return []
         }
         return this.cells.filter( ( cell ) => {
@@ -163,7 +163,7 @@ export default class Grid {
     }
 
     getCellValue( cell ) {
-        if ( ! cell ) {
+        if ( !cell ) {
             return null
         }
         return cell.innerText
@@ -175,7 +175,7 @@ export default class Grid {
 
     isGridFullyFilled() {
         for ( const cell of this.cells ) {
-            if ( ! this.getCellValue( cell ) ) {
+            if ( !this.getCellValue( cell ) ) {
                 return false
             }
         }
@@ -183,17 +183,17 @@ export default class Grid {
     }
 
     isGridSolved() {
-        if( ! this.correctValues ) {
+        if ( !this.correctValues ) {
             return
         }
         const correctGroups = Helpers.convertRowValuesToGroupedValues( this.correctValues )
         const correctGroupsFlat = Helpers.concatArraysInArray( correctGroups )
-        for (let i = 0; i < correctGroupsFlat.length; i++) {
-            const cell = this.cells[i]
-            if ( ! this.getCellValue( cell ) ) {
+        for ( let i = 0; i < correctGroupsFlat.length; i++ ) {
+            const cell = this.cells[ i ]
+            if ( !this.getCellValue( cell ) ) {
                 return
             }
-            if ( this.getCellValue( cell ) != correctGroupsFlat[i] ) {
+            if ( this.getCellValue( cell ) != correctGroupsFlat[ i ] ) {
                 return
             }
         }
@@ -201,23 +201,23 @@ export default class Grid {
     }
 
     setVerifyMode() {
-        if( ! this.correctValues ) {
+        if ( !this.correctValues ) {
             return
         }
         const correctGroups = Helpers.convertRowValuesToGroupedValues( this.correctValues )
         const correctGroupsFlat = Helpers.concatArraysInArray( correctGroups )
-        for (let i = 0; i < correctGroupsFlat.length; i++) {
-            const cell = this.cells[i]
-            cell.classList.add( 
-                this.getCellValue( cell ) == correctGroupsFlat[i] ? 'correct' : 'incorrect'
+        for ( let i = 0; i < correctGroupsFlat.length; i++ ) {
+            const cell = this.cells[ i ]
+            cell.classList.add(
+                this.getCellValue( cell ) == correctGroupsFlat[ i ] ? 'correct' : 'incorrect'
             )
         }
     }
 
     clearVerifyMode() {
         for ( let i = 0; i < this.cells.length; i++ ) {
-            this.cells[ i ].classList.remove( 'correct' )   
-            this.cells[ i ].classList.remove( 'incorrect' )   
+            this.cells[ i ].classList.remove( 'correct' )
+            this.cells[ i ].classList.remove( 'incorrect' )
         }
     }
 
@@ -230,7 +230,7 @@ export default class Grid {
     clearBoard() {
         for ( let i = 0; i < this.cells.length; i++ ) {
             this.cells[ i ].innerHTML = ''
-            this.cells[ i ].classList.remove( 'static' )  
+            this.cells[ i ].classList.remove( 'static' )
             this.clearVerifyMode()
         }
     }

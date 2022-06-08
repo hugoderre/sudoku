@@ -15,7 +15,7 @@ export default class GameController {
         this.gameUI.checkButton.addEventListener( 'click', this.verifyValues.bind( this ) )
 
         // Pad number
-        for( const padNumber of this.gameUI.padNumbers.children ) {
+        for ( const padNumber of this.gameUI.padNumbers.children ) {
             padNumber.addEventListener( 'click', this.handlePadNumber.bind( this ) )
         }
 
@@ -30,7 +30,7 @@ export default class GameController {
     }
 
     verifyValues() {
-        if( ! this.grid.correctValues ) {
+        if ( !this.grid.correctValues ) {
             return
         }
         this.grid.unsetEditableCell()
@@ -40,7 +40,7 @@ export default class GameController {
     }
 
     handlePadNumber( e ) {
-        if ( ! this.grid.userEditableCell ) {
+        if ( !this.grid.userEditableCell ) {
             return
         }
 
@@ -49,7 +49,7 @@ export default class GameController {
     }
 
     handleUserKeyInputs( e ) {
-        if ( ! ( this.grid.userEditableCell instanceof HTMLElement ) ) {
+        if ( !( this.grid.userEditableCell instanceof HTMLElement ) ) {
             return
         }
 
@@ -57,10 +57,10 @@ export default class GameController {
             this.grid.updateCellValue( this.grid.userEditableCell, '' )
         }
 
-        if ( ! isNaN( e.key ) && e.key != '0' ) {
+        if ( !isNaN( e.key ) && e.key != '0' ) {
             this.grid.updateCellValue( this.grid.userEditableCell, e.key )
         }
-        
+
         this.grid.highlightCells( this.grid.userEditableCell )
 
         if ( this.grid.isGridSolved() ) {
@@ -68,7 +68,7 @@ export default class GameController {
             this.gameUI.timer.stop()
             this.gameUI.showWinMessage( this.gameUI.timer.getTime() )
             this.grid.setCellsInStaticMode()
-        } else if( this.grid.isGridFullyFilled() ) {
+        } else if ( this.grid.isGridFullyFilled() ) {
             this.verifyValues()
         }
     }
