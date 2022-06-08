@@ -19,7 +19,6 @@ class App {
         this.gameUI = new GameUI( this.grid )
         this.container.prepend( this.gameUI.getTopElements() )
         this.container.append( this.gameUI.getPadNumbers() )
-        this.container.append( this.gameUI.getBottomElements() )
 
         new GameController( this.grid, this.gameUI )
 
