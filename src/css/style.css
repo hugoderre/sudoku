@@ -62,11 +62,33 @@ body {
   background-image: linear-gradient(0deg, #d9afd9 0%, #97d9e1 100%);
   min-height: 100vh;
 }
+#root h1 {
+  letter-spacing: 0.5em;
+}
+@media (max-width: 650px) {
+  #root h1 {
+    font-size: 28px;
+  }
+}
+@media (max-width: 500px) {
+  #root h1 {
+    font-size: 24px;
+  }
+}
+@media (max-width: 390px) {
+  #root h1 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 350px) {
+  #root h1 {
+    font-size: 16px;
+  }
+}
 #root .container {
   display: grid;
   grid-template-rows: 2fr 650px 5fr;
   width: 650px;
-  padding-top: min(50px, 5%);
 }
 @media (max-width: 650px) {
   #root .container {
