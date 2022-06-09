@@ -29,7 +29,7 @@ export default class Generator {
         const correctValues = Helpers.concatArraysInArray( Helpers.convertRowValuesToGroupedValues( this.gridValues ) )
 
         for ( let i = 0; i < correctValues.length; i++ ) {
-            this.grid.updateCellValue( this.grid.cells[ i ], correctValues[ i ] )
+            this.grid.updateCellValue( this.grid.cells[ i ], correctValues[ i ], false )
         }
 
         this.hideSomeCellsInGroups()
@@ -116,7 +116,7 @@ export default class Generator {
                 possibleIndexes = [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
             }
             if ( indexesToHide.includes( i % 9 ) ) {
-                this.grid.updateCellValue( this.grid.cells[ i ], null ) // Values to find
+                this.grid.updateCellValue( this.grid.cells[ i ], null, false ) // Values to find
             } else {
                 this.grid.cells[ i ].classList.add( 'static' ) // Base values
             }

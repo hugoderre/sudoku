@@ -4,10 +4,11 @@ export default class GameController {
     constructor( grid, gameUI ) {
         this.grid = grid
         this.gameUI = gameUI
-        this.init()
+        this.initEventListeners()
+        this.newGame() // Start a new game on page load
     }
 
-    init() {
+    initEventListeners() {
         document.getElementById( 'new-game' ).addEventListener( 'click', this.newGame.bind( this ) )
 
         document.getElementById( 'verify' ).addEventListener( 'click', this.verifyValues.bind( this ) )
@@ -45,7 +46,6 @@ export default class GameController {
         }
 
         this.grid.updateCellValue( this.grid.userEditableCell, e.target.innerText )
-        this.grid.highlightCells( this.grid.userEditableCell )
         this.handleMaybeSolvedGrid()
     }
 
@@ -55,7 +55,6 @@ export default class GameController {
         }
 
         this.grid.updateCellValue( this.grid.userEditableCell, '' )
-        this.grid.highlightCells( this.grid.userEditableCell )
     }
 
     handleCellTip() {
@@ -65,7 +64,6 @@ export default class GameController {
 
         const editableCellIndex = this.grid.cells.indexOf( this.grid.userEditableCell )
         this.grid.updateCellValue( this.grid.userEditableCell, this.grid.correctValues[ editableCellIndex ] )
-        this.grid.highlightCells( this.grid.userEditableCell )
         this.handleMaybeSolvedGrid()
     }
 

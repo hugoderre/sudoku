@@ -102,10 +102,14 @@ export default class Grid {
         }
     }
 
-    updateCellValue( cell, value ) {
+    updateCellValue( cell, value, highlight = true ) {
         let valueElement = document.createElement( 'span' )
         valueElement.innerText = value
         cell.innerHTML = valueElement.outerHTML
+
+        if ( highlight ) {
+            this.highlightCells( cell )
+        }
     }
 
     getRowedCellsDataFormat() {
