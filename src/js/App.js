@@ -1,6 +1,7 @@
 import Grid from "./Components/Grid.js";
 import GameUI from "./Components/GameUI.js";
 import GameController from "./Components/GameController.js";
+import SocialMedia from "./Components/SocialMedia.js";
 
 class App {
     constructor() {
@@ -20,6 +21,7 @@ class App {
         this.container.append( this.gameUI.getBottomElements() )
 
         this.rootDOM.append( this.container )
+        this.rootDOM.append( new SocialMedia().getElement() )
 
         new GameController( this.grid, this.gameUI )
     }
