@@ -1,5 +1,4 @@
 import Generator from "./Generator.js"
-import Helpers from "./Helpers.js"
 
 export default class GameController {
     constructor( grid, gameUI ) {
@@ -99,7 +98,6 @@ export default class GameController {
     gameWon() {
         this.grid.setVerifyMode()
         this.gameUI.timer.stop()
-        this.gameUI.winModal.show()
         this.grid.setCellsInStaticMode()
         this.grid.unsetEditableCell()
     }

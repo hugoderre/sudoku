@@ -1,15 +1,10 @@
 import Timer from './Timer.js';
-import WinModal from './WinModal.js';
+import GridOverlay from './GridOverlay.js';
 
 export default class GameUI {
     constructor( grid ) {
         this.grid = grid
         this.timer = new Timer()
-        this.winModal = new WinModal( this.timer )
-    }
-
-    getWinModal() {
-        return this.winModal.getModal()
     }
 
     getTopElements() {
