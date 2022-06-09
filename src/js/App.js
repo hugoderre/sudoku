@@ -18,6 +18,7 @@ class App {
         this.gameUI = new GameUI( this.grid )
         this.container.prepend( this.gameUI.getTopElements() )
         this.container.append( this.gameUI.getBottomElements() )
+        this.container.append( this.gameUI.getWinModal() )
 
         this.rootDOM.append( this.container )
 

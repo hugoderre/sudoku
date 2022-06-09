@@ -9,33 +9,26 @@ export default class GameController {
     }
 
     init() {
-        // New game
-        document.getElementById( 'new-game' ).addEventListener( 'click', this.startGame.bind( this ) )
+        document.getElementById( 'new-game' ).addEventListener( 'click', this.newGame.bind( this ) )
 
-        // Verify values
         document.getElementById( 'verify' ).addEventListener( 'click', this.verifyValues.bind( this ) )
 
-        // Pad number
         const padNumbers = document.getElementsByClassName( 'pad-number' )
         for ( const padNumber of padNumbers ) {
             padNumber.addEventListener( 'click', this.handlePadNumber.bind( this ) )
         }
 
-        // Cell erase button
         document.getElementById( 'cell-erase' ).addEventListener( 'click', this.handleCellErase.bind( this ) )
 
-        // Cell tip button
         document.getElementById( 'cell-tip' ).addEventListener( 'click', this.handleCellTip.bind( this ) )
 
-        // User keys inputs
         document.addEventListener( 'keydown', this.handleUserKeyInputs.bind( this ) )
     }
 
-    startGame() {
+    newGame() {
         this.grid.clearBoard()
         this.grid.correctValues = new Generator( this.grid, this.gameUI.getUserDifficulty() ).generateValues()
         this.gameUI.timer.start()
-        this.gameUI.createWinModal( this.gameUI.timer.getTime() )
     }
 
     verifyValues() {
@@ -106,7 +99,7 @@ export default class GameController {
     gameWon() {
         this.grid.setVerifyMode()
         this.gameUI.timer.stop()
-
+        this.gameUI.winModal.show()
         this.grid.setCellsInStaticMode()
         this.grid.unsetEditableCell()
     }

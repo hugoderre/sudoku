@@ -1,44 +1,15 @@
 import Timer from './Timer.js';
+import WinModal from './WinModal.js';
 
 export default class GameUI {
     constructor( grid ) {
         this.grid = grid
         this.timer = new Timer()
+        this.winModal = new WinModal( this.timer )
     }
 
-    createWinModal() {
-        const modal = document.createElement( 'div' )
-        modal.id = 'win-modal'
-        modal.append( this.getWinModalContent() )
-        return modal
-    }
-
-    getWinModalContent() {
-        const content = document.createElement( 'div' )
-        content.id = 'win-modal-content'
-        content.append( this.getWinModalTitle() )
-        content.append( this.getWinModalTime() )
-        content.append( this.getWinModalButton() )
-        return content
-    }
-
-    getWinModalTitle() {
-        const title = document.createElement( 'h1' )
-        title.innerText = 'You win!'
-        return title
-    }
-
-    getWinModalTime() {
-        const timeElement = document.createElement( 'p' )
-        timeElement.innerText = `You have completed the grid in ${this.timer.getTimer()} seconds!`
-        return timeElement
-    }
-
-    getWinModalButton() {
-        const button = document.createElement( 'button' )
-        button.innerText = 'Play again'
-        // button.addEventListener( 'click', this.playAgain.bind( this ) )
-        return button
+    getWinModal() {
+        return this.winModal.getModal()
     }
 
     getTopElements() {
