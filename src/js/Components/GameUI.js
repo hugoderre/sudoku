@@ -3,17 +3,48 @@ import Timer from './Timer.js';
 export default class GameUI {
     constructor( grid ) {
         this.grid = grid
+        this.timer = new Timer()
     }
 
-    showWinMessage( time ) {
-        console.log( 'You Win! Time: ' + time )
+    createWinModal() {
+        const modal = document.createElement( 'div' )
+        modal.id = 'win-modal'
+        modal.append( this.getWinModalContent() )
+        return modal
+    }
+
+    getWinModalContent() {
+        const content = document.createElement( 'div' )
+        content.id = 'win-modal-content'
+        content.append( this.getWinModalTitle() )
+        content.append( this.getWinModalTime() )
+        content.append( this.getWinModalButton() )
+        return content
+    }
+
+    getWinModalTitle() {
+        const title = document.createElement( 'h1' )
+        title.innerText = 'You win!'
+        return title
+    }
+
+    getWinModalTime() {
+        const timeElement = document.createElement( 'p' )
+        timeElement.innerText = `You have completed the grid in ${this.timer.getTimer()} seconds!`
+        return timeElement
+    }
+
+    getWinModalButton() {
+        const button = document.createElement( 'button' )
+        button.innerText = 'Play again'
+        // button.addEventListener( 'click', this.playAgain.bind( this ) )
+        return button
     }
 
     getTopElements() {
         const elements = document.createElement( 'div' )
         elements.id = 'game-ui-top'
         elements.append( this.getButtonsElements() )
-        this.timer = new Timer()
         elements.append( this.timer.getTimer() )
         return elements
     }
@@ -28,27 +59,27 @@ export default class GameUI {
     }
 
     getNewGameButton() {
-        this.newGameButton = document.createElement( 'button' )
-        this.newGameButton.id = 'new-game'
-        this.newGameButton.innerText = 'New Game'
-        return this.newGameButton
+        const newGameButton = document.createElement( 'button' )
+        newGameButton.id = 'new-game'
+        newGameButton.innerText = 'New Game'
+        return newGameButton
     }
 
     getDifficultySelector() {
-        this.difficultySelector = document.createElement( 'select' )
-        this.difficultySelector.id = 'difficulty-selector'
-        this.difficultySelector.append( this.getDifficultyOption( 'easy', true ) )
-        this.difficultySelector.append( this.getDifficultyOption( 'medium' ) )
-        this.difficultySelector.append( this.getDifficultyOption( 'hard' ) )
-        return this.difficultySelector
+        const difficultySelector = document.createElement( 'select' )
+        difficultySelector.id = 'difficulty-selector'
+        difficultySelector.append( this.getDifficultyOption( 'easy', true ) )
+        difficultySelector.append( this.getDifficultyOption( 'medium' ) )
+        difficultySelector.append( this.getDifficultyOption( 'hard' ) )
+        return difficultySelector
     }
 
     getDifficultyOption( difficulty, selected = false ) {
-        this.difficultyOption = document.createElement( 'option' )
-        this.difficultyOption.value = difficulty
-        this.difficultyOption.innerText = difficulty.charAt( 0 ).toUpperCase() + difficulty.slice( 1 );
-        this.difficultyOption.selected = selected
-        return this.difficultyOption
+        const difficultyOption = document.createElement( 'option' )
+        difficultyOption.value = difficulty
+        difficultyOption.innerText = difficulty.charAt( 0 ).toUpperCase() + difficulty.slice( 1 );
+        difficultyOption.selected = selected
+        return difficultyOption
     }
 
     getUserDifficulty() {
@@ -56,10 +87,10 @@ export default class GameUI {
     }
 
     getVerifyButton() {
-        this.checkButton = document.createElement( 'button' )
-        this.checkButton.id = 'verify'
-        this.checkButton.innerText = 'Verify'
-        return this.checkButton
+        const checkButton = document.createElement( 'button' )
+        checkButton.id = 'verify'
+        checkButton.innerText = 'Verify'
+        return checkButton
     }
 
     getBottomElements() {
@@ -71,16 +102,17 @@ export default class GameUI {
     }
 
     getPadNumbers() {
-        this.padNumbers = document.createElement( 'div' )
-        this.padNumbers.id = 'pad-numbers'
+        const padNumbers = document.createElement( 'div' )
+        padNumbers.id = 'pad-numbers'
         for ( let number = 1; number <= 9; number++ ) {
-            this.padNumbers.append( this.getPadNumber( number ) )
+            padNumbers.append( this.getPadNumber( number ) )
         }
-        return this.padNumbers
+        return padNumbers
     }
 
     getPadNumber( number ) {
         const padNumber = document.createElement( 'div' )
+        padNumber.classList.add( 'pad-number' )
         const padNumberSpan = document.createElement( 'span' )
         padNumberSpan.innerText = number
         padNumber.append( padNumberSpan )
@@ -96,20 +128,20 @@ export default class GameUI {
     }
 
     getCellEraseButton() {
-        this.cellEraseButton = document.createElement( 'div' )
-        this.cellEraseButton.id = 'cell-erase'
+        const cellEraseButton = document.createElement( 'div' )
+        cellEraseButton.id = 'cell-erase'
         const cellEraseButtonSpan = document.createElement( 'span' )
         cellEraseButtonSpan.innerHTML = '<i class="fa-solid fa-eraser"></i>'
-        this.cellEraseButton.append( cellEraseButtonSpan )
-        return this.cellEraseButton
+        cellEraseButton.append( cellEraseButtonSpan )
+        return cellEraseButton
     }
 
     getCellTipButton() {
-        this.tipCellButton = document.createElement( 'div' )
-        this.tipCellButton.id = 'cell-tip'
+        const tipCellButton = document.createElement( 'div' )
+        tipCellButton.id = 'cell-tip'
         const tipCellButtonSpan = document.createElement( 'span' )
         tipCellButtonSpan.innerHTML = '<i class="fa-solid fa-lightbulb"></i>'
-        this.tipCellButton.append( tipCellButtonSpan )
-        return this.tipCellButton
+        tipCellButton.append( tipCellButtonSpan )
+        return tipCellButton
     }
 }

@@ -19,9 +19,9 @@ class App {
         this.container.prepend( this.gameUI.getTopElements() )
         this.container.append( this.gameUI.getBottomElements() )
 
-        new GameController( this.grid, this.gameUI )
-
         this.rootDOM.append( this.container )
+
+        new GameController( this.grid, this.gameUI )
     }
 }
 

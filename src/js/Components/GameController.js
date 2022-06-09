@@ -10,21 +10,22 @@ export default class GameController {
 
     init() {
         // New game
-        this.gameUI.newGameButton.addEventListener( 'click', this.startGame.bind( this ) )
+        document.getElementById( 'new-game' ).addEventListener( 'click', this.startGame.bind( this ) )
 
         // Verify values
-        this.gameUI.checkButton.addEventListener( 'click', this.verifyValues.bind( this ) )
+        document.getElementById( 'verify' ).addEventListener( 'click', this.verifyValues.bind( this ) )
 
         // Pad number
-        for ( const padNumber of this.gameUI.padNumbers.children ) {
+        const padNumbers = document.getElementsByClassName( 'pad-number' )
+        for ( const padNumber of padNumbers ) {
             padNumber.addEventListener( 'click', this.handlePadNumber.bind( this ) )
         }
 
         // Cell erase button
-        this.gameUI.cellEraseButton.addEventListener( 'click', this.handleCellErase.bind( this ) )
+        document.getElementById( 'cell-erase' ).addEventListener( 'click', this.handleCellErase.bind( this ) )
 
         // Cell tip button
-        this.gameUI.tipCellButton.addEventListener( 'click', this.handleCellTip.bind( this ) )
+        document.getElementById( 'cell-tip' ).addEventListener( 'click', this.handleCellTip.bind( this ) )
 
         // User keys inputs
         document.addEventListener( 'keydown', this.handleUserKeyInputs.bind( this ) )
@@ -34,6 +35,7 @@ export default class GameController {
         this.grid.clearBoard()
         this.grid.correctValues = new Generator( this.grid, this.gameUI.getUserDifficulty() ).generateValues()
         this.gameUI.timer.start()
+        this.gameUI.createWinModal( this.gameUI.timer.getTime() )
     }
 
     verifyValues() {
@@ -52,6 +54,7 @@ export default class GameController {
 
         this.grid.updateCellValue( this.grid.userEditableCell, e.target.innerText )
         this.grid.highlightCells( this.grid.userEditableCell )
+        this.handleMaybeSolvedGrid()
     }
 
     handleCellErase() {
@@ -103,7 +106,7 @@ export default class GameController {
     gameWon() {
         this.grid.setVerifyMode()
         this.gameUI.timer.stop()
-        this.gameUI.showWinMessage( this.gameUI.timer.getTime() )
+
         this.grid.setCellsInStaticMode()
         this.grid.unsetEditableCell()
     }
