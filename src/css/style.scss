@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap");
 @import "./modules/timer";
 
+:root {
+    --confetti-element-size: 0%;
+}
+
 html,
 body {
     font-family: "Inter", sans-serif;
@@ -44,6 +48,7 @@ body {
         }
 
         #grid {
+            position: relative;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: 1fr 1fr 1fr;
@@ -91,6 +96,15 @@ body {
                         color: #020c99;
                     }
                 }
+            }
+            &::before {
+                content: "";
+                display: block;
+                width: var(--confetti-element-size);
+                height: var(--confetti-element-size);
+                position: absolute;
+                background-image: url("../img/confetti.gif");
+                opacity: 0.5;
             }
         }
 

@@ -27,6 +27,7 @@ export default class GameController {
 
     newGame() {
         this.grid.clearBoard()
+        this.grid.displayConfettis( false )
         this.grid.correctValues = new Generator( this.grid, this.gameUI.getUserDifficulty() ).generateValues()
         this.gameUI.timer.start()
     }
@@ -96,6 +97,7 @@ export default class GameController {
     gameWon() {
         this.grid.setVerifyMode()
         this.gameUI.timer.stop()
+        this.grid.displayConfettis( true )
         this.grid.setCellsInStaticMode()
         this.grid.unsetEditableCell()
     }

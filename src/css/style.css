@@ -43,6 +43,10 @@
   border-radius: 100px;
 }
 
+:root {
+  --confetti-element-size: 0%;
+}
+
 html,
 body {
   font-family: "Inter", sans-serif;
@@ -92,6 +96,7 @@ body {
   margin: auto;
 }
 #root .container #grid {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -148,6 +153,15 @@ body {
 }
 #root .container #grid .group .cell:not(.static) {
   color: #020c99;
+}
+#root .container #grid::before {
+  content: "";
+  display: block;
+  width: var(--confetti-element-size);
+  height: var(--confetti-element-size);
+  position: absolute;
+  background-image: url("../img/confetti.gif");
+  opacity: 0.5;
 }
 #root .container #game-ui-top {
   margin: auto;

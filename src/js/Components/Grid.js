@@ -203,6 +203,11 @@ export default class Grid {
         return true
     }
 
+    displayConfettis( show = true ) {
+        const size = show ? '100%' : '0%'
+        this.DOMContainer.style.setProperty( '--confetti-element-size', size );
+    }
+
     setVerifyMode() {
         if ( !this.correctValues ) {
             return
