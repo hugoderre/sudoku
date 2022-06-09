@@ -1,5 +1,4 @@
 import Timer from './Timer.js';
-import GridOverlay from './GridOverlay.js';
 
 export default class GameUI {
     constructor( grid ) {
