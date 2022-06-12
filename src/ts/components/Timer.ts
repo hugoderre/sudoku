@@ -1,6 +1,12 @@
 export default class Timer {
+    time: number
+    timerSpan: HTMLSpanElement
+    tick: NodeJS.Timer
+    
     constructor() {
         this.time = 0
+        this.tick = null
+        this.timerSpan = null
     }
 
     getTimer() {

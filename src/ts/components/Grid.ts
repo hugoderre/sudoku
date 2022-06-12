@@ -1,13 +1,10 @@
 import Helpers from "./Helpers.js"
 
 export default class Grid {
-    constructor() {
-        this.userEditableCell = null
-        this.cells = []
-        this.correctValues = []
-        this.checkMode = true
-        this.DOMContainer = this.initBoard()
-    }
+    userEditableCell: HTMLDivElement = null
+    cells: HTMLDivElement[] = []
+    correctValues: number[] = []
+    DOMContainer: HTMLDivElement = null
 
     getBoard() {
         return this.DOMContainer
@@ -18,12 +15,12 @@ export default class Grid {
         grid.id = 'grid'
         for ( let groupIndex = 1; groupIndex <= 9; groupIndex++ ) {
             let groupElement = document.createElement( 'div' )
-            groupElement.dataset.groupIndex = groupIndex
+            groupElement.dataset.groupIndex = groupIndex.toString()
             groupElement.classList.add( 'group' )
             for ( let cellIndex = 1; cellIndex <= 9; cellIndex++ ) {
                 let cellElement = document.createElement( 'div' )
                 cellElement.classList.add( 'cell' )
-                cellElement.dataset.cellIndex = cellIndex
+                cellElement.dataset.cellIndex = cellIndex.toString()
                 cellElement.addEventListener( 'click', this.cellEditableListener.bind( this ) )
                 groupElement.append( cellElement )
                 this.cells.push( cellElement )
@@ -34,9 +31,11 @@ export default class Grid {
         return grid;
     }
 
-    cellEditableListener( e ) {
+    cellEditableListener( e: MouseEvent ) {
+        const cell = e.target as HTMLDivElement
+
         // Return if player click on a static cell
-        if ( e.target.classList.contains( 'static' ) ) {
+        if ( cell.classList.contains( 'static' ) ) {
             return
         }
 
@@ -49,7 +48,7 @@ export default class Grid {
         this.setEditableCell( e.target )
     }
 
-    setEditableCell( cell ) {
+    setEditableCell( cell: Cell ) {
         this.userEditableCell = cell
         this.userEditableCell.classList.add( 'editable' )
         this.highlightCells( this.userEditableCell )
@@ -64,13 +63,13 @@ export default class Grid {
         this.unsetHighlightCells()
     }
 
-    highlightCells( cell ) {
+    highlightCells( cell: HTMLDivElement ) {
         this.unsetHighlightCells()
         this.highlightAttachedCells( cell )
         this.highlightAllConflictCells()
     }
 
-    highlightAttachedCells( cell ) {
+    highlightAttachedCells( cell: HTMLDivElement ) {
         const attachedCells = this.getCellsAttachedToEditableCell( cell )
         for ( let i = 0; i < attachedCells.length; i++ ) {
             attachedCells[ i ].classList.add( 'attached-to-editable' )
@@ -102,9 +101,9 @@ export default class Grid {
         }
     }
 
-    updateCellValue( cell, value, highlight = true ) {
+    updateCellValue( cell: HTMLDivElement, value: number, highlight = true ) {
         let valueElement = document.createElement( 'span' )
-        valueElement.innerText = value
+        valueElement.innerText = value.toString()
         cell.innerHTML = valueElement.outerHTML
 
         if ( highlight ) {
@@ -116,7 +115,7 @@ export default class Grid {
         return Helpers.concatArraysInArray( Helpers.convertGroupedValuesToRowValues( Helpers.arraysInArray( this.cells ) ) )
     }
 
-    getCellsAttachedToEditableCell( cell ) {
+    getCellsAttachedToEditableCell( cell: HTMLDivElement ) {
         const attachedCells = [
             ...this.getGroupOfCells( cell ),
             ...this.getRowOfCells( cell ),
@@ -127,12 +126,12 @@ export default class Grid {
         return [ ...new Set( attachedCells ) ]
     }
 
-    getGroupOfCells( cell ) {
+    getGroupOfCells( cell: HTMLDivElement ) {
         const groupIndex = this.getGroupIndex( cell )
         return this.cells.slice( ( groupIndex - 1 ) * 9, groupIndex * 9 )
     }
 
-    getRowOfCells( cell ) {
+    getRowOfCells( cell: HTMLDivElement ) {
         const rowIndex = this.getRowIndex( cell )
 
         return this.cells.filter( ( cell ) => {
