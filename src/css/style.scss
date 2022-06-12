@@ -164,6 +164,9 @@ body {
             display: flex;
             justify-content: center;
             gap: 10px;
+            @media (max-width: 500px) {
+                gap: 6px;
+            }
             @media (max-width: 350px) {
                 gap: 4px;
             }
