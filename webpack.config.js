@@ -18,7 +18,7 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            publicPath: '../',
+                            publicPath: './',
                         },
                     },
                     'css-loader',
@@ -27,14 +27,7 @@ module.exports = {
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-                type: "asset",
-                use: [ {
-                    loader: 'url-loader',
-                    options: {
-                        limit: 8000, // Convert images < 8kb to base64 strings
-                        name: 'img/[hash]-[name].[ext]'
-                    }
-                } ]
+                type: "asset/resource",
             },
         ],
     },
@@ -49,7 +42,4 @@ module.exports = {
     optimization: {
         minimize: true
     },
-    // include: [
-    //     "src/types/**/*"
-    // ],
 };
