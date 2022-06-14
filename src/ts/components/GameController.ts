@@ -1,7 +1,12 @@
-import Generator from "./Generator.js"
+import GameUI from "./GameUI"
+import Generator from "./Generator"
+import Grid from "./Grid"
 
 export default class GameController {
-    constructor( grid, gameUI ) {
+    grid: Grid
+    gameUI: GameUI
+
+    constructor( grid: Grid, gameUI: GameUI ) {
         this.grid = grid
         this.gameUI = gameUI
         this.initEventListeners()
@@ -9,18 +14,18 @@ export default class GameController {
     }
 
     initEventListeners() {
-        document.getElementById( 'new-game' ).addEventListener( 'click', this.newGame.bind( this ) )
+        document.getElementById( 'new-game' )?.addEventListener( 'click', this.newGame.bind( this ) )
 
-        document.getElementById( 'verify' ).addEventListener( 'click', this.verifyValues.bind( this ) )
+        document.getElementById( 'verify' )?.addEventListener( 'click', this.verifyValues.bind( this ) )
 
-        const padNumbers = document.getElementsByClassName( 'pad-number' )
+        const padNumbers: Element[] = Array.from( document.getElementsByClassName( 'pad-number' ) )
         for ( const padNumber of padNumbers ) {
             padNumber.addEventListener( 'click', this.handlePadNumber.bind( this ) )
         }
 
-        document.getElementById( 'cell-erase' ).addEventListener( 'click', this.handleCellErase.bind( this ) )
+        document.getElementById( 'cell-erase' )?.addEventListener( 'click', this.handleCellErase.bind( this ) )
 
-        document.getElementById( 'cell-tip' ).addEventListener( 'click', this.handleCellTip.bind( this ) )
+        document.getElementById( 'cell-tip' )?.addEventListener( 'click', this.handleCellTip.bind( this ) )
 
         document.addEventListener( 'keydown', this.handleUserKeyInputs.bind( this ) )
     }
@@ -41,12 +46,13 @@ export default class GameController {
         this.grid.setVerifyMode()
     }
 
-    handlePadNumber( e ) {
+    handlePadNumber( e: Event ) {
         if ( !this.grid.userEditableCell ) {
             return
         }
 
-        this.grid.updateCellValue( this.grid.userEditableCell, e.target.innerText )
+        const padNumber: HTMLDivElement = e.target as HTMLDivElement
+        this.grid.updateCellValue( this.grid.userEditableCell, parseInt( padNumber.innerText ) )
         this.handleMaybeSolvedGrid()
     }
 
@@ -55,7 +61,7 @@ export default class GameController {
             return
         }
 
-        this.grid.updateCellValue( this.grid.userEditableCell, '' )
+        this.grid.removeCellValue( this.grid.userEditableCell )
     }
 
     handleCellTip() {
@@ -68,17 +74,17 @@ export default class GameController {
         this.handleMaybeSolvedGrid()
     }
 
-    handleUserKeyInputs( e ) {
+    handleUserKeyInputs( e: KeyboardEvent ) {
         if ( !( this.grid.userEditableCell instanceof HTMLElement ) ) {
             return
         }
 
         if ( e.key == 'Backspace' ) {
-            this.grid.updateCellValue( this.grid.userEditableCell, '' )
+            this.grid.removeCellValue( this.grid.userEditableCell )
         }
 
-        if ( !isNaN( e.key ) && e.key != '0' ) {
-            this.grid.updateCellValue( this.grid.userEditableCell, e.key )
+        if ( parseInt( e.key ) > 0 && parseInt( e.key ) <= 9 ) {
+            this.grid.updateCellValue( this.grid.userEditableCell, parseInt( e.key ) )
         }
 
         this.grid.highlightCells( this.grid.userEditableCell )

@@ -1,10 +1,14 @@
-import Helpers from './Helpers.js'
+import Grid from './Grid'
+import Helpers from './Helpers'
 
 export default class Generator {
-    constructor( grid, difficulty ) {
+    grid: Grid
+    difficulty: string
+    gridValues: number[][] = this.getBaseGrid()
+
+    constructor( grid: Grid, difficulty: string ) {
         this.grid = grid
         this.difficulty = difficulty
-        this.gridValues = this.getBaseGrid()
     }
 
     generateValues() {
@@ -37,7 +41,7 @@ export default class Generator {
         return correctValues
     }
 
-    getBaseGrid() {
+    getBaseGrid(): number[][] {
         return ( [
             [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
             [ 4, 5, 6, 7, 8, 9, 1, 2, 3 ],
@@ -51,7 +55,7 @@ export default class Generator {
         ] )
     }
 
-    shuffleDigits() {
+    shuffleDigits(): void {
         const possibleDigits = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         const randomDigit1 = Math.ceil( Math.random() * possibleDigits.length )
         possibleDigits.splice( possibleDigits.indexOf( randomDigit1 ), 1 )
@@ -67,7 +71,7 @@ export default class Generator {
         }
     }
 
-    shuffleRows( range ) {
+    shuffleRows( range: number[] ): void {
         const min = range[ 0 ]
         const max = range[ 1 ]
         const randomRow = Math.floor( Math.random() * ( max - min + 1 ) + min )
@@ -77,7 +81,7 @@ export default class Generator {
         this.gridValues[ randomRow2 ] = row
     }
 
-    shuffleColumns( range ) {
+    shuffleColumns( range: number[] ) {
         const min = range[ 0 ]
         const max = range[ 1 ]
         const randomColumn = Math.floor( Math.random() * ( max - min + 1 ) + min )
@@ -100,11 +104,12 @@ export default class Generator {
                 cellQuantityPerGroupToHide = 6
                 break
             default:
+                cellQuantityPerGroupToHide = 0
                 break
         }
 
         let possibleIndexes = [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
-        let indexesToHide
+        let indexesToHide: number[] = []
         for ( let i = 0; i < this.grid.cells.length; i++ ) {
             if ( i % 9 === 0 ) {
                 indexesToHide = []
@@ -116,7 +121,7 @@ export default class Generator {
                 possibleIndexes = [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
             }
             if ( indexesToHide.includes( i % 9 ) ) {
-                this.grid.updateCellValue( this.grid.cells[ i ], null, false ) // Values to find
+                this.grid.removeCellValue( this.grid.cells[ i ] ) // Values to find
             } else {
                 this.grid.cells[ i ].classList.add( 'static' ) // Base values
             }

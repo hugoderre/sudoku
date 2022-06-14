@@ -1,9 +1,8 @@
 /// <reference types="node" />
 export default class Timer {
     time: number;
+    tick: NodeJS.Timer | undefined;
     timerSpan: HTMLSpanElement;
-    tick: NodeJS.Timer;
-    constructor();
     getTimer(): HTMLDivElement;
     start(): void;
     update(): void;

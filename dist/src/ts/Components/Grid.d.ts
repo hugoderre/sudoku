@@ -1,0 +1,35 @@
+export default class Grid {
+    userEditableCell: HTMLDivElement | null;
+    cells: HTMLDivElement[];
+    correctValues: number[];
+    DOMContainer: HTMLDivElement;
+    constructor();
+    getBoard(): HTMLDivElement;
+    initBoard(): HTMLDivElement;
+    cellEditableListener(e: MouseEvent): void;
+    setEditableCell(cell: HTMLDivElement): void;
+    unsetEditableCell(): void;
+    highlightCells(cell: HTMLDivElement): void;
+    highlightAttachedCells(cell: HTMLDivElement): void;
+    highlightAllConflictCells(): void;
+    unsetHighlightCells(): void;
+    updateCellValue(cell: HTMLDivElement, value: number, highlight?: boolean): void;
+    removeCellValue(cell: HTMLDivElement): void;
+    getRowedCellsDataFormat(): any[];
+    getCellsAttachedToEditableCell(cell: HTMLDivElement): HTMLDivElement[];
+    getGroupOfCells(cell: HTMLDivElement): HTMLDivElement[];
+    getRowOfCells(cell: HTMLDivElement): HTMLDivElement[];
+    getColumnOfCells(cell: HTMLDivElement): HTMLDivElement[];
+    getCellsWithSameValue(cell: HTMLDivElement): HTMLDivElement[];
+    getRowIndex(cell: HTMLDivElement): number;
+    getColumnIndex(cell: HTMLDivElement): number;
+    getCellValue(cell: HTMLDivElement): number | null;
+    getGroupIndex(cell: HTMLDivElement): number;
+    isGridFullyFilled(): boolean;
+    isGridSolved(): true | undefined;
+    displayConfettis(show?: boolean): void;
+    setVerifyMode(): void;
+    clearVerifyMode(): void;
+    setCellsInStaticMode(): void;
+    clearBoard(): void;
+}

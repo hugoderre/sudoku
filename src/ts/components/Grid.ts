@@ -1,10 +1,14 @@
-import Helpers from "./Helpers.js"
+import Helpers from "./Helpers"
 
 export default class Grid {
-    userEditableCell: HTMLDivElement = null
+    userEditableCell: HTMLDivElement | null = null
     cells: HTMLDivElement[] = []
     correctValues: number[] = []
-    DOMContainer: HTMLDivElement = null
+    DOMContainer: HTMLDivElement
+
+    constructor( ) {
+        this.DOMContainer = this.initBoard()
+    }
 
     getBoard() {
         return this.DOMContainer
@@ -45,10 +49,10 @@ export default class Grid {
             this.unsetEditableCell()
         }
 
-        this.setEditableCell( e.target )
+        this.setEditableCell( cell )
     }
 
-    setEditableCell( cell: Cell ) {
+    setEditableCell( cell: HTMLDivElement ) {
         this.userEditableCell = cell
         this.userEditableCell.classList.add( 'editable' )
         this.highlightCells( this.userEditableCell )
@@ -103,12 +107,16 @@ export default class Grid {
 
     updateCellValue( cell: HTMLDivElement, value: number, highlight = true ) {
         let valueElement = document.createElement( 'span' )
-        valueElement.innerText = value.toString()
+        valueElement.innerText = typeof value == 'number' ? value.toString() : ''
         cell.innerHTML = valueElement.outerHTML
 
         if ( highlight ) {
             this.highlightCells( cell )
         }
+    }
+
+    removeCellValue( cell: HTMLDivElement ) {
+        cell.innerHTML = ''
     }
 
     getRowedCellsDataFormat() {
@@ -139,7 +147,7 @@ export default class Grid {
         } )
     }
 
-    getColumnOfCells( cell ) {
+    getColumnOfCells( cell: HTMLDivElement ) {
         const columnIndex = this.getColumnIndex( cell )
 
         return this.cells.filter( ( cell ) => {
@@ -147,7 +155,7 @@ export default class Grid {
         } )
     }
 
-    getCellsWithSameValue( cell ) {
+    getCellsWithSameValue( cell: HTMLDivElement ) {
         const value = this.getCellValue( cell )
         if ( !value ) {
             return []
@@ -157,23 +165,23 @@ export default class Grid {
         } )
     }
 
-    getRowIndex( cell ) {
+    getRowIndex( cell: HTMLDivElement ) {
         return Math.floor( this.getRowedCellsDataFormat().indexOf( cell ) / 9 )
     }
 
-    getColumnIndex( cell ) {
+    getColumnIndex( cell: HTMLDivElement ) {
         return this.getRowedCellsDataFormat().indexOf( cell ) % 9
     }
 
-    getCellValue( cell ) {
+    getCellValue( cell: HTMLDivElement ): number | null {
         if ( !cell ) {
             return null
         }
-        return cell.innerText
+        return parseInt(cell.innerText)
     }
 
-    getGroupIndex( cell ) {
-        return parseInt( cell.parentNode.dataset.groupIndex )
+    getGroupIndex( cell: HTMLDivElement ): number  {
+        return parseInt(cell.parentElement!.dataset.groupIndex!)
     }
 
     isGridFullyFilled() {

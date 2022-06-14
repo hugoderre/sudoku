@@ -1,19 +1,12 @@
 export default class Timer {
-    time: number
-    timerSpan: HTMLSpanElement
-    tick: NodeJS.Timer
-    
-    constructor() {
-        this.time = 0
-        this.tick = null
-        this.timerSpan = null
-    }
+    time: number = 0
+    tick: NodeJS.Timer | undefined = undefined
+    timerSpan: HTMLSpanElement = document.createElement( 'span' )
 
     getTimer() {
         const timerContainer = document.createElement( 'div' )
         timerContainer.id = 'timer'
 
-        this.timerSpan = document.createElement( 'span' )
         this.timerSpan.innerText = '00:00'
 
         const timerIcon = document.createElement( 'i' )

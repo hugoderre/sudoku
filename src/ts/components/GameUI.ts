@@ -1,9 +1,12 @@
-import Timer from './Timer.js';
+import Grid from './Grid';
+import Timer from './Timer';
 
 export default class GameUI {
-    constructor( grid ) {
+    grid: Grid
+    timer: Timer = new Timer()
+
+    constructor( grid: Grid ) {
         this.grid = grid
-        this.timer = new Timer()
     }
 
     getTopElements() {
@@ -39,7 +42,7 @@ export default class GameUI {
         return difficultySelector
     }
 
-    getDifficultyOption( difficulty, selected = false ) {
+    getDifficultyOption( difficulty: string, selected = false ) {
         const difficultyOption = document.createElement( 'option' )
         difficultyOption.value = difficulty
         difficultyOption.innerText = difficulty.charAt( 0 ).toUpperCase() + difficulty.slice( 1 );
@@ -48,7 +51,8 @@ export default class GameUI {
     }
 
     getUserDifficulty() {
-        return document.getElementById( 'difficulty-selector' ).value
+        const difficultySelector = document.getElementById( 'difficulty-selector' ) as HTMLSelectElement
+        return difficultySelector.value
     }
 
     getVerifyButton() {
@@ -75,11 +79,11 @@ export default class GameUI {
         return padNumbers
     }
 
-    getPadNumber( number ) {
+    getPadNumber( number: number ) {
         const padNumber = document.createElement( 'div' )
         padNumber.classList.add( 'pad-number' )
         const padNumberSpan = document.createElement( 'span' )
-        padNumberSpan.innerText = number
+        padNumberSpan.innerText = number.toString()
         padNumber.append( padNumberSpan )
         return padNumber
     }

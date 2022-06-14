@@ -9,5 +9,7 @@
         "allowJs": true,
         "moduleResolution": "node",
         "declaration": true,
+        "strict": true,
+        "strictNullChecks": true
     }
 }
