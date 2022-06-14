@@ -1,5 +1,5 @@
 export default class SocialMedia {
-    socialMedia: { [key: string]: { icon: string, href: string } }
+    socialMedia: SocialMediaObject
 
     constructor() {
         this.socialMedia = {

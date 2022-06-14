@@ -9,6 +9,7 @@
         "allowJs": true,
         "moduleResolution": "node",
         "declaration": true,
+        "declarationDir": "./dist/typings",
         "strict": true,
         "strictNullChecks": true,
         "checkJs": true,

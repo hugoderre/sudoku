@@ -1,7 +1,8 @@
-import Grid from "./components/Grid";
-import GameUI from "./components/GameUI";
-import GameController from "./components/GameController";
-import SocialMedia from "./components/SocialMedia";
+import Grid from "./Components/Grid";
+import GameUI from "./Components/GameUI";
+import GameController from "./Components/GameController";
+import SocialMedia from "./Components/SocialMedia";
+import './Assets/scss/style.scss';
 
 class App {
     rootDOM: HTMLElement = document.getElementById( 'root' ) as HTMLElement
