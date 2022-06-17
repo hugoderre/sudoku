@@ -1,8 +1,8 @@
 import Helpers from "./Helpers"
 
 export default class Grid {
-    userEditableCell: HTMLDivElement | null = null
-    cells: HTMLDivElement[] = []
+    userEditableCell: Cell | null = null
+    cells: Cell[] = []
     correctValues: number[] = []
     DOMContainer: HTMLDivElement
 
@@ -36,7 +36,7 @@ export default class Grid {
     }
 
     cellEditableListener( e: MouseEvent ) {
-        const cell = e.target as HTMLDivElement
+        const cell = e.target as Cell
 
         // Return if player click on a static cell
         if ( cell.classList.contains( 'static' ) ) {
@@ -52,7 +52,7 @@ export default class Grid {
         this.setEditableCell( cell )
     }
 
-    setEditableCell( cell: HTMLDivElement ) {
+    setEditableCell( cell: Cell ) {
         this.userEditableCell = cell
         this.userEditableCell.classList.add( 'editable' )
         this.highlightCells( this.userEditableCell )
@@ -67,13 +67,13 @@ export default class Grid {
         this.unsetHighlightCells()
     }
 
-    highlightCells( cell: HTMLDivElement ) {
+    highlightCells( cell: Cell ) {
         this.unsetHighlightCells()
         this.highlightAttachedCells( cell )
         this.highlightAllConflictCells()
     }
 
-    highlightAttachedCells( cell: HTMLDivElement ) {
+    highlightAttachedCells( cell: Cell ) {
         const attachedCells = this.getCellsAttachedToEditableCell( cell )
         for ( let i = 0; i < attachedCells.length; i++ ) {
             attachedCells[ i ].classList.add( 'attached-to-editable' )
@@ -105,7 +105,7 @@ export default class Grid {
         }
     }
 
-    updateCellValue( cell: HTMLDivElement, value: number, highlight = true ) {
+    updateCellValue( cell: Cell, value: number, highlight = true ) {
         let valueElement = document.createElement( 'span' )
         valueElement.innerText = typeof value == 'number' ? value.toString() : ''
         cell.innerHTML = valueElement.outerHTML
@@ -115,7 +115,7 @@ export default class Grid {
         }
     }
 
-    removeCellValue( cell: HTMLDivElement, highlight = true ) {
+    removeCellValue( cell: Cell, highlight = true ) {
         cell.innerHTML = ''
 
         if ( highlight ) {
@@ -127,7 +127,7 @@ export default class Grid {
         return Helpers.concatArraysInArray( Helpers.convertGroupedValuesToRowValues( Helpers.arraysInArray( this.cells ) ) )
     }
 
-    getCellsAttachedToEditableCell( cell: HTMLDivElement ) {
+    getCellsAttachedToEditableCell( cell: Cell ) {
         const attachedCells = [
             ...this.getGroupOfCells( cell ),
             ...this.getRowOfCells( cell ),
@@ -138,12 +138,12 @@ export default class Grid {
         return [ ...new Set( attachedCells ) ]
     }
 
-    getGroupOfCells( cell: HTMLDivElement ) {
+    getGroupOfCells( cell: Cell ) {
         const groupIndex = this.getGroupIndex( cell )
         return this.cells.slice( ( groupIndex - 1 ) * 9, groupIndex * 9 )
     }
 
-    getRowOfCells( cell: HTMLDivElement ) {
+    getRowOfCells( cell: Cell ) {
         const rowIndex = this.getRowIndex( cell )
 
         return this.cells.filter( ( cell ) => {
@@ -151,7 +151,7 @@ export default class Grid {
         } )
     }
 
-    getColumnOfCells( cell: HTMLDivElement ) {
+    getColumnOfCells( cell: Cell ) {
         const columnIndex = this.getColumnIndex( cell )
 
         return this.cells.filter( ( cell ) => {
@@ -159,7 +159,7 @@ export default class Grid {
         } )
     }
 
-    getCellsWithSameValue( cell: HTMLDivElement ) {
+    getCellsWithSameValue( cell: Cell ) {
         const value = this.getCellValue( cell )
         if ( !value ) {
             return []
@@ -169,22 +169,22 @@ export default class Grid {
         } )
     }
 
-    getRowIndex( cell: HTMLDivElement ) {
+    getRowIndex( cell: Cell ) {
         return Math.floor( this.getRowedCellsDataFormat().indexOf( cell ) / 9 )
     }
 
-    getColumnIndex( cell: HTMLDivElement ) {
+    getColumnIndex( cell: Cell ) {
         return this.getRowedCellsDataFormat().indexOf( cell ) % 9
     }
 
-    getCellValue( cell: HTMLDivElement ): number | null {
+    getCellValue( cell: Cell ): number | null {
         if ( !cell ) {
             return null
         }
         return parseInt(cell.innerText)
     }
 
-    getGroupIndex( cell: HTMLDivElement ): number  {
+    getGroupIndex( cell: Cell ): number  {
         return parseInt(cell.parentElement!.dataset.groupIndex!)
     }
 
