@@ -115,8 +115,12 @@ export default class Grid {
         }
     }
 
-    removeCellValue( cell: HTMLDivElement ) {
+    removeCellValue( cell: HTMLDivElement, highlight = true ) {
         cell.innerHTML = ''
+
+        if ( highlight ) {
+            this.highlightCells( cell )
+        }
     }
 
     getRowedCellsDataFormat() {

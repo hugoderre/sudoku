@@ -14,7 +14,7 @@ export default class Grid {
     highlightAllConflictCells(): void;
     unsetHighlightCells(): void;
     updateCellValue(cell: HTMLDivElement, value: number, highlight?: boolean): void;
-    removeCellValue(cell: HTMLDivElement): void;
+    removeCellValue(cell: HTMLDivElement, highlight?: boolean): void;
     getRowedCellsDataFormat(): any[];
     getCellsAttachedToEditableCell(cell: HTMLDivElement): HTMLDivElement[];
     getGroupOfCells(cell: HTMLDivElement): HTMLDivElement[];
