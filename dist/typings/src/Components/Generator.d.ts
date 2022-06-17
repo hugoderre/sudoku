@@ -9,5 +9,5 @@ export default class Generator {
     shuffleDigits(): void;
     shuffleRows(range: number[]): void;
     shuffleColumns(range: number[]): void;
-    hideSomeCellsInGroups(): void;
+    hideSomeCells(): void;
 }
