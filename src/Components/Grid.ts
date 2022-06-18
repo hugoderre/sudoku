@@ -181,7 +181,7 @@ export default class Grid {
         if ( !cell ) {
             return null
         }
-        return parseInt(cell.innerText)
+        return cell.innerText ? parseInt( cell.innerText ) : null
     }
 
     getGroupIndex( cell: Cell ): number  {
