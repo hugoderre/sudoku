@@ -96,6 +96,9 @@ body {
                             font-size: 22px;
                         }
                     }
+                    &.static {
+                        background-color: #5856562b;
+                    }
                     &.attached-to-editable {
                         background-color: #6e5dd12e;
                     }
