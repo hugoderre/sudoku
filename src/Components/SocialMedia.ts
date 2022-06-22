@@ -14,7 +14,7 @@ export default class SocialMedia {
         }
     }
 
-    getElement() {
+    getElement(): HTMLElement {
         const container = document.createElement( 'div' )
         container.id = 'social-media'
         for ( const key in this.socialMedia ) {

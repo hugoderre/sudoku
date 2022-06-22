@@ -14,7 +14,7 @@ export default class Grid {
         return this.DOMContainer
     }
 
-    initBoard() {
+    initBoard(): HTMLDivElement {
         const grid = document.createElement( 'div' )
         grid.id = 'grid'
         for ( let groupIndex = 1; groupIndex <= 9; groupIndex++ ) {
@@ -138,12 +138,12 @@ export default class Grid {
         return [ ...new Set( attachedCells ) ]
     }
 
-    getGroupOfCells( cell: Cell ) {
+    getGroupOfCells( cell: Cell ): Cell[] {
         const groupIndex = this.getGroupIndex( cell )
         return this.cells.slice( ( groupIndex - 1 ) * 9, groupIndex * 9 )
     }
 
-    getRowOfCells( cell: Cell ) {
+    getRowOfCells( cell: Cell ): Cell[] {
         const rowIndex = this.getRowIndex( cell )
 
         return this.cells.filter( ( cell ) => {
@@ -151,7 +151,7 @@ export default class Grid {
         } )
     }
 
-    getColumnOfCells( cell: Cell ) {
+    getColumnOfCells( cell: Cell ): Cell[] {
         const columnIndex = this.getColumnIndex( cell )
 
         return this.cells.filter( ( cell ) => {
@@ -159,7 +159,7 @@ export default class Grid {
         } )
     }
 
-    getCellsWithSameValue( cell: Cell ) {
+    getCellsWithSameValue( cell: Cell ): Cell[] {
         const value = this.getCellValue( cell )
         if ( !value ) {
             return []
@@ -169,11 +169,11 @@ export default class Grid {
         } )
     }
 
-    getRowIndex( cell: Cell ) {
+    getRowIndex( cell: Cell ): number {
         return Math.floor( this.getRowedCellsDataFormat().indexOf( cell ) / 9 )
     }
 
-    getColumnIndex( cell: Cell ) {
+    getColumnIndex( cell: Cell ): number {
         return this.getRowedCellsDataFormat().indexOf( cell ) % 9
     }
 
@@ -188,7 +188,7 @@ export default class Grid {
         return parseInt(cell.parentElement!.dataset.groupIndex!)
     }
 
-    isGridFullyFilled() {
+    isGridFullyFilled(): boolean {
         for ( const cell of this.cells ) {
             if ( !this.getCellValue( cell ) ) {
                 return false
@@ -197,18 +197,18 @@ export default class Grid {
         return true
     }
 
-    isGridSolved() {
+    isGridSolved(): boolean {
         if ( !this.correctValues ) {
-            return
+            return false
         }
 
         for ( let i = 0; i < this.correctValues.length; i++ ) {
             const cell = this.cells[ i ]
             if ( !this.getCellValue( cell ) ) {
-                return
+                return false
             }
             if ( this.getCellValue( cell ) != this.correctValues[ i ] ) {
-                return
+                return false
             }
         }
         return true
@@ -219,7 +219,7 @@ export default class Grid {
         this.DOMContainer.style.setProperty( '--confetti-element-size', size );
     }
 
-    setVerifyMode() {
+    setVerifyMode(): void {
         if ( !this.correctValues ) {
             return
         }

@@ -39,7 +39,7 @@ export default class Timer {
         clearInterval( this.tick )
     }
 
-    getTime() {
+    getTime(): string {
         const minutes = Math.floor( this.time / 60 )
         const seconds = this.time % 60
         return `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`

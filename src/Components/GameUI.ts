@@ -9,7 +9,7 @@ export default class GameUI {
         this.grid = grid
     }
 
-    getTopElements() {
+    getTopElements(): HTMLElement {
         const elements = document.createElement( 'div' )
         elements.id = 'game-ui-top'
         elements.append( this.getButtonsElements() )
@@ -17,7 +17,7 @@ export default class GameUI {
         return elements
     }
 
-    getButtonsElements() {
+    getButtonsElements(): HTMLElement {
         const elements = document.createElement( 'div' )
         elements.id = 'game-ui-buttons'
         elements.append( this.getNewGameButton() )
@@ -26,14 +26,14 @@ export default class GameUI {
         return elements
     }
 
-    getNewGameButton() {
+    getNewGameButton(): HTMLButtonElement {
         const newGameButton = document.createElement( 'button' )
         newGameButton.id = 'new-game'
         newGameButton.innerText = 'New Game'
         return newGameButton
     }
 
-    getDifficultySelector() {
+    getDifficultySelector(): HTMLSelectElement {
         const difficultySelector = document.createElement( 'select' )
         difficultySelector.id = 'difficulty-selector'
         difficultySelector.append( this.getDifficultyOption( 'easy', true ) )
@@ -42,7 +42,7 @@ export default class GameUI {
         return difficultySelector
     }
 
-    getDifficultyOption( difficulty: string, selected = false ) {
+    getDifficultyOption( difficulty: string, selected = false ): HTMLOptionElement {
         const difficultyOption = document.createElement( 'option' )
         difficultyOption.value = difficulty
         difficultyOption.innerText = difficulty.charAt( 0 ).toUpperCase() + difficulty.slice( 1 );
@@ -50,19 +50,19 @@ export default class GameUI {
         return difficultyOption
     }
 
-    getUserDifficulty() {
+    getUserDifficulty(): string {
         const difficultySelector = document.getElementById( 'difficulty-selector' ) as HTMLSelectElement
         return difficultySelector.value
     }
 
-    getVerifyButton() {
+    getVerifyButton(): HTMLButtonElement {
         const checkButton = document.createElement( 'button' )
         checkButton.id = 'verify'
         checkButton.innerText = 'Verify'
         return checkButton
     }
 
-    getBottomElements() {
+    getBottomElements(): HTMLElement {
         const elements = document.createElement( 'div' )
         elements.id = 'game-ui-bottom'
         elements.append( this.getPadNumbers() )
@@ -70,7 +70,7 @@ export default class GameUI {
         return elements
     }
 
-    getPadNumbers() {
+    getPadNumbers(): HTMLElement {
         const padNumbers = document.createElement( 'div' )
         padNumbers.id = 'pad-numbers'
         for ( let number = 1; number <= 9; number++ ) {
@@ -79,7 +79,7 @@ export default class GameUI {
         return padNumbers
     }
 
-    getPadNumber( number: number ) {
+    getPadNumber( number: number ): HTMLElement {
         const padNumber = document.createElement( 'div' )
         padNumber.classList.add( 'pad-number' )
         const padNumberSpan = document.createElement( 'span' )
@@ -88,7 +88,7 @@ export default class GameUI {
         return padNumber
     }
 
-    getGridCellActionsButtons() {
+    getGridCellActionsButtons(): HTMLElement {
         const elements = document.createElement( 'div' )
         elements.id = 'grid-actions-buttons'
         elements.append( this.getCellEraseButton() )
@@ -96,7 +96,7 @@ export default class GameUI {
         return elements
     }
 
-    getCellEraseButton() {
+    getCellEraseButton(): HTMLElement {
         const cellEraseButton = document.createElement( 'div' )
         cellEraseButton.id = 'cell-erase'
         const cellEraseButtonSpan = document.createElement( 'span' )
@@ -105,7 +105,7 @@ export default class GameUI {
         return cellEraseButton
     }
 
-    getCellTipButton() {
+    getCellTipButton(): HTMLElement {
         const tipCellButton = document.createElement( 'div' )
         tipCellButton.id = 'cell-tip'
         const tipCellButtonSpan = document.createElement( 'span' )

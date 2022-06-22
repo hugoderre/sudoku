@@ -4,17 +4,17 @@ export default class GameUI {
     grid: Grid;
     timer: Timer;
     constructor(grid: Grid);
-    getTopElements(): HTMLDivElement;
-    getButtonsElements(): HTMLDivElement;
+    getTopElements(): HTMLElement;
+    getButtonsElements(): HTMLElement;
     getNewGameButton(): HTMLButtonElement;
     getDifficultySelector(): HTMLSelectElement;
     getDifficultyOption(difficulty: string, selected?: boolean): HTMLOptionElement;
     getUserDifficulty(): string;
     getVerifyButton(): HTMLButtonElement;
-    getBottomElements(): HTMLDivElement;
-    getPadNumbers(): HTMLDivElement;
-    getPadNumber(number: number): HTMLDivElement;
-    getGridCellActionsButtons(): HTMLDivElement;
-    getCellEraseButton(): HTMLDivElement;
-    getCellTipButton(): HTMLDivElement;
+    getBottomElements(): HTMLElement;
+    getPadNumbers(): HTMLElement;
+    getPadNumber(number: number): HTMLElement;
+    getGridCellActionsButtons(): HTMLElement;
+    getCellEraseButton(): HTMLElement;
+    getCellTipButton(): HTMLElement;
 }

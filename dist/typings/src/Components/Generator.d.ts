@@ -4,7 +4,7 @@ export default class Generator {
     difficulty: string;
     gridValues: number[][];
     constructor(grid: Grid, difficulty: string);
-    generateValues(): any[];
+    generateValues(): number[];
     getBaseGrid(): number[][];
     shuffleDigits(): void;
     shuffleRows(range: number[]): void;

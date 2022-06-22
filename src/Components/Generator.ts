@@ -11,7 +11,7 @@ export default class Generator {
         this.difficulty = difficulty
     }
 
-    generateValues() {
+    generateValues(): number[] {
 
         for ( let i = 0; i < 200; i++ ) {
             this.shuffleDigits()
@@ -71,7 +71,7 @@ export default class Generator {
         }
     }
 
-    shuffleRows( range: number[] ): void {
+    shuffleRows( range: number[] ) {
         const min = range[ 0 ]
         const max = range[ 1 ]
         const randomRow = Math.floor( Math.random() * ( max - min + 1 ) + min )
