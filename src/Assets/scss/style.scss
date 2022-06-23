@@ -40,7 +40,6 @@ body {
         display: grid;
         grid-template-rows: 2fr 650px 5fr;
         width: 650px;
-        // padding-top: min(50px, 5%);
 
         @media (max-width: 650px) {
             max-width: 500px;
