@@ -44,15 +44,11 @@ export default class Grid {
         }
 
         this.clearVerifyMode()
-
-        if ( this.userEditableCell ) {
-            this.unsetEditableCell()
-        }
-
         this.setEditableCell( cell )
     }
 
     setEditableCell( cell: Cell ) {
+        this.unsetEditableCell()
         this.userEditableCell = cell
         this.userEditableCell.classList.add( 'editable' )
         this.highlightCells( this.userEditableCell )

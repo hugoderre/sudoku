@@ -40,6 +40,12 @@ export default class Helpers {
         return result
     }
 
+    static convertFlatGroupedValuesToFlatRowValues( flatGroupedValues: any[] ) {
+        return Helpers.concatArraysInArray(
+               Helpers.convertRowValuesToGroupedValues(
+               Helpers.arraysInArray(flatGroupedValues)))
+    }
+
     static arraysInArray( array: any[], itemByArray = 9 ) {
         let result = []
         let subArray = []

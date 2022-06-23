@@ -11,6 +11,7 @@ export default class GameController {
     handleCellErase(): void;
     handleCellTip(): void;
     handleUserKeyInputs(e: KeyboardEvent): void;
+    moveEditableCellWithArrowKey(e: KeyboardEvent, rowedCells?: HTMLDivElement[]): void;
     handleMaybeSolvedGrid(): void;
     gameWon(): void;
 }

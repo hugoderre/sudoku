@@ -1,6 +1,7 @@
 import GameUI from "./GameUI"
 import Generator from "./Generator"
 import Grid from "./Grid"
+import Helpers from "./Helpers"
 
 export default class GameController {
     grid: Grid
@@ -79,6 +80,10 @@ export default class GameController {
             return
         }
 
+        if ( e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' ) {
+            this.moveEditableCellWithArrowKey( e )
+        }
+
         if ( e.key == 'Backspace' ) {
             this.grid.removeCellValue( this.grid.userEditableCell )
         }
@@ -91,6 +96,64 @@ export default class GameController {
         this.handleMaybeSolvedGrid()
     }
 
+    moveEditableCellWithArrowKey( e: KeyboardEvent, rowedCells?: HTMLDivElement[] ) {
+        if ( !this.grid.userEditableCell ) {
+            return
+        }
+
+        e.preventDefault()
+
+        // Sort cells order to move easily the editable cell
+        if ( !rowedCells ) { // Avoid recomputing while recursing
+            rowedCells = Helpers.convertFlatGroupedValuesToFlatRowValues( this.grid.cells )
+        }
+
+        const editableCellIndex = rowedCells.indexOf( this.grid.userEditableCell )
+        let newEditableCellIndex = editableCellIndex
+        
+        switch ( e.key ) {
+            case 'ArrowLeft':
+                if ( editableCellIndex % 9 === 0 ) {
+                    newEditableCellIndex += 8
+                } else {
+                    newEditableCellIndex -= 1
+                }
+                break
+            case 'ArrowRight':
+                if ( ( editableCellIndex + 1 ) % 9 === 0 ) {
+                    newEditableCellIndex -= 8
+                } else {
+                    newEditableCellIndex += 1
+                }
+                break
+            case 'ArrowUp':
+                if ( editableCellIndex <= 8 ) {
+                    newEditableCellIndex += 72
+                } else {
+                    newEditableCellIndex -= 9
+                }
+                break
+            case 'ArrowDown':
+                if ( editableCellIndex >= 72 ) {
+                    newEditableCellIndex -= 72
+                } else {
+                    newEditableCellIndex += 9
+                }
+                break
+        }
+
+        if ( rowedCells[ newEditableCellIndex ].classList.contains( 'static' ) ) {
+            this.grid.unsetEditableCell()
+
+            // Set the new editable cell directly in property to avoid unnecessary DOM traversal
+            this.grid.userEditableCell = rowedCells[ newEditableCellIndex ] as HTMLDivElement
+
+            this.moveEditableCellWithArrowKey( e )
+            return
+        }
+
+        this.grid.setEditableCell( rowedCells[ newEditableCellIndex ] )
+    }
 
     handleMaybeSolvedGrid() {
         if ( this.grid.isGridSolved() ) {
