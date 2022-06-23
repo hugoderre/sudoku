@@ -1,0 +1,231 @@
+@import "./timer";
+
+:root {
+    --confetti-element-size: 0%;
+}
+
+#sudoku {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .container {
+        display: grid;
+        grid-template-rows: 2fr 650px 5fr;
+        width: 650px;
+
+        @media (max-width: 650px) {
+            max-width: 500px;
+            grid-template-rows: 2fr 500px 5fr;
+        }
+        @media (max-width: 500px) {
+            max-width: 400px;
+            grid-template-rows: 2fr 400px 5fr;
+        }
+        @media (max-width: 390px) {
+            max-width: 350px;
+            grid-template-rows: 2fr 350px 5fr;
+        }
+        @media (max-width: 350px) {
+            max-width: 250px;
+            grid-template-rows: 2fr 250px 5fr;
+        }
+
+        & > div {
+            margin: auto;
+        }
+
+        #grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            width: 100%;
+            height: 100%;
+            .group {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+                border: 1px solid #020202;
+                .cell {
+                    border: 1px solid #020202;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    span {
+                        font-size: 40px;
+                        pointer-events: none;
+                        @media (max-width: 650px) {
+                            font-size: 34px;
+                        }
+                        @media (max-width: 500px) {
+                            font-size: 30px;
+                        }
+                        @media (max-width: 390px) {
+                            font-size: 26px;
+                        }
+                        @media (max-width: 350px) {
+                            font-size: 22px;
+                        }
+                    }
+                    &.static {
+                        background-color: #5856562b;
+                    }
+                    &.attached-to-editable {
+                        background-color: #6e5dd12e;
+                    }
+                    &.editable {
+                        background-color: #2609cd4e;
+                    }
+                    &.correct {
+                        background-color: #00e74154;
+                    }
+                    &.incorrect {
+                        background-color: #e7230054;
+                    }
+                    &:not(.static) {
+                        color: #020c99;
+                    }
+                }
+            }
+            &::before {
+                content: "";
+                display: block;
+                width: var(--confetti-element-size);
+                height: var(--confetti-element-size);
+                position: absolute;
+                background-image: url("../img/confetti.gif");
+                opacity: 0.5;
+            }
+        }
+
+        #game-ui-top {
+            margin: auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            #timer {
+                display: flex;
+                align-self: flex-end;
+                gap: 5px;
+                padding-bottom: 5px;
+                height: 20px;
+                width: 82px;
+                @media (max-width: 390px) {
+                    width: 67px;
+                }
+                @media (max-width: 350px) {
+                    width: 30px;
+                }
+                .gg-timer {
+                    @media (max-width: 350px) {
+                        display: none;
+                    }
+                }
+                span {
+                    align-self: flex-end;
+                    font-size: 20px;
+                    @media (max-width: 500px) {
+                        font-size: 18px;
+                    }
+                    @media (max-width: 390px) {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+        #game-ui-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            @media (max-width: 500px) {
+                gap: 6px;
+            }
+            @media (max-width: 350px) {
+                gap: 4px;
+            }
+            button,
+            select {
+                color: #020202;
+                border: 2px solid #020202;
+                padding: 10px 20px;
+                font-size: 20px;
+                cursor: pointer;
+                text-transform: uppercase;
+                font-weight: 700;
+                background-color: transparent;
+                text-align: center;
+
+                option {
+                    text-align: left;
+                }
+
+                @media (max-width: 650px) {
+                    font-size: 16px;
+                }
+                @media (max-width: 500px) {
+                    font-size: 14px;
+                    padding: 5px 10px;
+                }
+                @media (max-width: 390px) {
+                    font-size: 10px;
+                    padding: 0px 10px;
+                }
+                @media (max-width: 350px) {
+                    font-size: 8.5px;
+                    padding: 0px 10px;
+                }
+            }
+        }
+
+        #pad-numbers,
+        #grid-actions-buttons {
+            display: flex;
+            gap: 5px;
+            padding-top: 10px;
+            & > div {
+                display: flex;
+                justify-content: center;
+                background-color: #6c65d534;
+                width: 68px;
+                height: 68px;
+                font-size: 32px;
+                @media (max-width: 650px) {
+                    width: 51px;
+                    height: 51px;
+                    font-size: 26px;
+                }
+                @media (max-width: 500px) {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 24px;
+                }
+                @media (max-width: 390px) {
+                    width: 34.5px;
+                    height: 34.5px;
+                    font-size: 19px;
+                }
+
+                @media (max-width: 350px) {
+                    width: 23.5px;
+                    height: 23.5px;
+                    font-size: 16px;
+                }
+                & > span {
+                    display: flex;
+                    align-self: center;
+                    pointer-events: none;
+                }
+            }
+            & > div:hover {
+                background-color: #6c65d550;
+            }
+        }
+
+        #grid-actions-buttons {
+            justify-content: center;
+        }
+    }
+}
